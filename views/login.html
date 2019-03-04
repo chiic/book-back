@@ -1,0 +1,23 @@
+<div class="login-wrapper">
+    <form class="form-wrapper login" method="post" action="/api/back/login">
+        <div class="field">
+            <p class="control has-icons-left">
+                <input id="username" class="input" type="email" name="username" placeholder="Email">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input id="password" name="psd" class="input" type="password" placeholder="Password">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="error-message" id="error-message"></div>
+        <input id="submit" class="button is-small is-fullwidth is-info" type="submit" />
+    </form>    
+</div>
+<script src="/public/js/login.js"></script>>

@@ -1,0 +1,43 @@
+.login-wrapper {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.form-wrapper {
+    width: 30%;
+    height: 200px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
+.index-wrapper {
+    width: 800px;
+    margin: 100px auto;
+}
+
+.add-element {
+    width: 50%;
+    margin: auto;
+}
+
+.add-element input {
+    margin: 20px auto;
+}
+
+.add-element .tag-span {
+    margin: 20px auto;
+}
+
+.add-btn {
+    margin: 20px auto;
+}
