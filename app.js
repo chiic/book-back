@@ -4,6 +4,7 @@ var logger = require('./common/logger');
 var request_log = require('./middlewares/request_log');
 var express = require('express');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var cors = require('cors');
 var app = express();
 var routerApi = require('./router/routerApi');
@@ -11,7 +12,7 @@ var indexRender = require('./router/indexRender');
 // 常用中间件
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
+app.use(cookieParser())
 // 请求日志
 app.use(request_log);
 // cors可请求origin配置

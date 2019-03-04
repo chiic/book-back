@@ -2,11 +2,11 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 var userlogin = require('../controllers/userlogin');
+var homePage = require('../controllers/home');
 var models = require('../models/index');
 // 主页
-router.get('/', function(req, res) {
-    res.render('index', {title: '主页'});
-});
+router.get('/', homePage.render);
+router.get('/favicon.ico', homePage.render);
 // 登录页
 router.get('/login', userlogin.render);
 
