@@ -1,25 +1,29 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var router = express.Router();
 var userlogin = require('../controllers/userlogin');
 var homePage = require('../controllers/home');
-var models = require('../models/index');
+var overviewPage = require('../controllers/overview')
+var booklistApi = require('../controllers/booklist');
+var authToken = require('../middlewares/auth');
+
+// 权限控制
+router.use(/^(?!\/(api|login)).*/, authToken());
+
 // 主页
 router.get('/', homePage.render);
 router.get('/favicon.ico', homePage.render);
+
 // 登录页
 router.get('/login', userlogin.render);
+// 登录api
+router.post('/api/back/login', userlogin.index);
 
-// 登录
-router.post('/api/back/login', userlogin.index)
 // 添加书籍
-router.post('/api/back/addbook', function(req, res) {
-    models.booklistModel.create(req.body, function(err) {
-        if(!err) {
-            res.status(200);
-            res.json({success: true})
-        }
-    });
-})
+router.post('/api/back/addbook', booklistApi.addBook);
+// 删除书籍
+router.delete('/api/back/removebook', booklistApi.removeBook);
+
+// 概览页面
+router.get('/overview', overviewPage.render)
 
 module.exports = router;

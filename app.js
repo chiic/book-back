@@ -7,12 +7,13 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
 var app = express();
-var routerApi = require('./router/routerApi');
+var Api = require('./api/v1/output.js');
 var indexRender = require('./router/indexRender');
 // 常用中间件
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+// app.use(csrf({ cookie: true }));
 // 请求日志
 app.use(request_log);
 // cors可请求origin配置
@@ -28,9 +29,9 @@ app.engine('html', require('ejs-mate'));
 app.locals._layoutFile = 'layout.html';
 
 //路由服务
-app.use('/', indexRender);
-app.use('/api/v1', cors(corsOptions), routerApi);
+app.use('/api/v1', cors(corsOptions), Api);
 app.use('/public', express.static('./public'));
+app.use('/', indexRender);
 
 app.listen(config.port, config.hostname, function(err) {
   if(!err) {

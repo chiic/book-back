@@ -35,6 +35,8 @@ function addData() {
     xhr.onreadystatechange = function(req, res) {
         if(xhr.readyState === 4 && xhr.status === 200) {
             btn.removeAttribute('disabled');
+            var html = document.getElementsByClassName('add-element')[0];
+            html.remove();
         }
     }
     xhr.open('POST', '/api/back/addbook');

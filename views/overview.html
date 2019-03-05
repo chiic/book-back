@@ -1,0 +1,41 @@
+<%- partial('_partial/nav') %>
+<table class="table">
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>Key</th>
+            <th>下载链接</th>
+            <th>图片地址</th>
+            <th>动作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% bookdataSet.forEach(function(item, index){%>
+        <tr class="book-col">
+            <td>
+                <%= item.name %>
+            </td>
+            <td>
+                <%= item.key %>
+            </td>
+            <td>
+                <%= item.url %>
+            </td>
+            <td>
+                <%= item.img %>
+            </td>
+            <td>
+                <a class="button" onclick="removeThebook('<%= JSON.stringify(item) %>', this)">
+                    <span class="icon is-small">
+                        <i class="fa fa-close"></i>
+                    </span>
+                </a>
+            </td>
+
+        </tr>
+        <% }) %>
+        <tr>
+        </tr>
+    </tbody>
+</table>
+<script src="/public/js/overview.js"></script>

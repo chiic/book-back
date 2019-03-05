@@ -1,13 +1,26 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/test', { useNewUrlParser: true });
-var db = mongoose.connection;
-// db日志
-db.on('error',console.error.bind(console,'连接错误:'));
-db.once('open', function (callback) {
-  console.log("数据库成功连接");
-});
+var models = require('../models/index');
 
-exports.getbooktype = function(req, res) {
-  
+exports.addBook = function(req, res) {
+    models.booklistModel.create(req.body, function(err) {
+        if(!err) {
+            res.status(200);
+            res.json({success: true});
+        }
+    });
 }
 
+exports.removeBook = function(req, res) {
+    models.booklistModel.deleteOne(req.body, function (err) {
+        if (!err) {
+            res.json({deleting: 'success'});
+        }
+      });
+}
+
+exports.getBooklist = function(req, res){
+    models.booklistModel.find(function(err, list) {
+        if(list.length > 0) {
+            res.json(list);
+        }
+    });
+}
