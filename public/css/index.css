@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .login-wrapper {
     width: 100%;
     height: 100vh;
@@ -41,3 +46,92 @@
 .add-btn {
     margin: 20px auto;
 }
+
+.table-wrapper {
+    width: 900px;
+    margin: 50px auto;
+}
+
+.book-col:hover {
+    background-color: hsl(165, 17%, 91%);
+}
+
+.nav-wrapper {
+    display: flex;
+    margin: 10px 20px;
+}
+
+.nav-wrapper .navbar-item {
+    display: block;
+}
+.nav-wrapper .navbar-item.actived .footer-name {
+    width: 100%;
+}
+.nav-wrapper .navbar-item .footer-name {
+    display: block;
+    height: 2px;
+    width: 0;
+    background: red;
+    transition: all 0.5s;
+}
+.nav-wrapper .navbar-item {
+    border-bottom: 0;
+    margin-right: 10px;
+    transition: all 1s;
+}
+
+.nav-wrapper .navbar-item:hover .footer-name {
+    width: 100%;
+}
+.table td, .table th {
+    vertical-align: middle !important;
+}
+
+.book-col td {
+    width: 20%;
+    word-break: break-all;
+    box-sizing: border-box;
+    border: 1px solid #dbdbdb;
+    height: 50px;
+    border-width: 0 0 1px;
+}
+
+tbody tr:nth-child(odd) {
+    background: hsl(180, 12%, 97%);
+}
+
+.global-message {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: 1px solid rgb(247, 241, 241);
+    position: fixed;
+    left: 50%;
+    margin-left: -10px;
+    top: -30px;
+    opacity: 0;
+}
+
+.show-message {
+    animation:  showMessage 1s;
+}
+
+@keyframes showMessage {
+    0% {
+        top: -30px;
+        opacity: 0;
+    }
+    50% {
+        top: 30px;
+        opacity: 1;
+    }
+    90% {
+        opacity: 0;
+        top: 30px;
+    }
+    100% {
+        opacity: 0;
+        top: -30px;
+    }
+}
+

@@ -1,12 +1,21 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item" href="/">
-                书籍添加
-            </a>
-            <a class="navbar-item" href="/overview">
-                概览
-            </a>
-        </div>
-    </div>
+<nav class="nav-wrapper">
+    <a class="navbar-item" href="/">
+        <span class="name">书籍添加</span>
+        <span class="footer-name"></span>
+    </a>
+    <a class="navbar-item" href="/overview">
+        <span class="name">概览</span>
+        <span class="footer-name"></span>
+    </a>
 </nav>
+<script>
+    window.onload = function() {
+        var getPathname = window.location.pathname;
+        var _thisA = document.getElementsByClassName('navbar-item');
+        for(var i = 0; i < _thisA.length; i++) {
+            if(_thisA[i].getAttribute('href') == getPathname) {
+                _thisA[i].classList.add('actived');
+            }
+        }
+    }
+</script>

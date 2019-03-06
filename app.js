@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 // app.use(csrf({ cookie: true }));
 // 请求日志
-app.use(request_log);
+// app.use(request_log);
 // cors可请求origin配置
 var corsOptions = {
   origin: 'http://book.chiic.com',

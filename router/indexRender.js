@@ -22,6 +22,8 @@ router.post('/api/back/login', userlogin.index);
 router.post('/api/back/addbook', booklistApi.addBook);
 // 删除书籍
 router.delete('/api/back/removebook', booklistApi.removeBook);
+// 更新书籍
+router.put('/api/back/updatebook', booklistApi.updatebook);
 
 // 概览页面
 router.get('/overview', overviewPage.render)

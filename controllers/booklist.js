@@ -10,9 +10,13 @@ exports.addBook = function(req, res) {
 }
 
 exports.removeBook = function(req, res) {
-    models.booklistModel.deleteOne(req.body, function (err) {
+    models.booklistModel.findById(req.body, function (err, doc) {
         if (!err) {
-            res.json({deleting: 'success'});
+            models.booklistModel.deleteOne(doc, function(err) {
+                if(!err) {
+                    res.json({deleting: 'success'});
+                }
+            });
         }
       });
 }
@@ -23,4 +27,16 @@ exports.getBooklist = function(req, res){
             res.json(list);
         }
     });
+}
+
+exports.updatebook = function(req, res) {
+    models.booklistModel.updateOne(
+        req.body._id,
+        req.body,
+        function(err, doc) {
+            if(!err) {
+                console.log(doc);
+                res.json({success: true});
+            }
+        })
 }
