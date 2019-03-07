@@ -1,0 +1,3 @@
+## R
+
+* [R语言忍者秘笈](https://github.com/yihui/r-ninja)

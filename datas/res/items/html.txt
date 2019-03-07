@@ -1,0 +1,12 @@
+## CSS/HTML
+
+* [学习CSS布局](http://zh.learnlayout.com/)
+* [通用 CSS 笔记、建议与指导](https://github.com/chadluo/CSS-Guidelines/blob/master/README.md)
+* [CSS参考手册](http://css.doyoe.com/)
+* [Emmet 文档](http://yanxyz.github.io/emmet-docs/)
+* [前端代码规范](http://alloyteam.github.io/CodeGuide/)
+* [HTML和CSS编码规范](http://codeguide.bootcss.com/)
+* [Sass Guidelines 中文](http://sass-guidelin.es/zh/)
+* [CSS3 Tutorial 《CSS3 教程》](https://github.com/waylau/css3-tutorial)
+* [MDN HTML 中文文档](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
+* [MDN CSS 中文文档](https://developer.mozilla.org/zh-CN/docs/Web/CSS)

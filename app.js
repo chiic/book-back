@@ -15,10 +15,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 // app.use(csrf({ cookie: true }));
 // 请求日志
-// app.use(request_log);
+app.use(request_log);
 // cors可请求origin配置
 var corsOptions = {
-  origin: 'http://book.chiic.com',
+  origin: 'http://localhost:8080',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
