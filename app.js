@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(request_log);
 // cors可请求origin配置
 var corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: 'http://47.102.124.163:8080',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
