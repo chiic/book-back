@@ -8,12 +8,7 @@ function removeThebook(item, self) {
     xhr.onreadystatechange = function() {
         if(xhr.readyState == 4 && xhr.status == 200) {
             self.parentNode.parentNode.remove();
-            var messge = document.getElementById('global-message');
-                messge.innerHTML = '删除成功';
-                messge.className = 'global-message show-message';
-                setTimeout(function() {
-                    messge.className = 'global-message hidden-message';
-                }, 1001);
+            showMessage('删除成功', 2, 'success');
         }
     }
     xhr.open('DELETE','/api/back/removebook');
@@ -38,13 +33,7 @@ function updateThebook(item, self) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4 && xhr.status == 200) {
-                // self.parentNode.parentNode.remove();
-                var messge = document.getElementById('global-message');
-                messge.innerHTML = '更新成功';
-                messge.className = 'global-message show-message';
-                setTimeout(function() {
-                    messge.className = 'global-message hidden-message';
-                }, 1001);
+                showMessage('更新成功', 2, 'success');
             }
         }
         xhr.open('PUT','/api/back/updatebook');

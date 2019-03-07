@@ -3,26 +3,26 @@ var closeBtn = document.getElementById('close-btn');
 var indexWrapper = document.getElementById('index-wrapper');
 
 function addData() {
-    var img = document.getElementById('imgUrl').value;
-    var name = document.getElementById('name').value;
-    var url = document.getElementById('uploadUrl').value;
+    var img = document.getElementById('imgUrl').value.trim();
+    var name = document.getElementById('name').value.trim();
+    var url = document.getElementById('uploadUrl').value.trim();
     var tags = document.getElementById('tags');
     var key = tags.options[tags.selectedIndex].value
+    if(!img  && !name && !url) {
+        showMessage('请填写完整', 2, 'error');
+        return false;
+    }
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function (req, res) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             btn.removeAttribute('disabled');
             btn.addEventListener('click', addBtn);
             closeBtn.removeEventListener('click', closeBtnHandler);
+            closeBtn.setAttribute('disabled', 'disabled')
             var html = document.getElementsByClassName('add-element')[0];
             html.remove();
-            var messge = document.getElementById('global-message');
-            messge.innerHTML = '添加成功';
-            messge.className = 'global-message show-message';
-            setTimeout(function () {
-                messge.className = 'global-message hidden-message';
-            }, 1001);
-
+            // var messge = document.getElementById('global-message');
+            showMessage('添加成功', 1, 'success');
         }
     }
     xhr.open('POST', '/api/back/addbook');
