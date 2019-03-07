@@ -13,6 +13,7 @@ function addData() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             btn.removeAttribute('disabled');
             btn.addEventListener('click', addBtn);
+            closeBtn.removeEventListener('click', closeBtnHandler);
             var html = document.getElementsByClassName('add-element')[0];
             html.remove();
             var messge = document.getElementById('global-message');

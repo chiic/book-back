@@ -35,7 +35,6 @@ exports.updatebook = function(req, res) {
         req.body,
         function(err, doc) {
             if(!err) {
-                console.log(doc);
                 res.json({success: true});
             }
         })

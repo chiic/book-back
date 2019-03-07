@@ -80,6 +80,16 @@
     transition: all 1s;
 }
 
+.table-wrapper table th {
+    text-align: center;
+}
+.table-wrapper table th:last-child {
+    width: 15%
+}
+
+.table-wrapper table th:nth-child(2) {
+    width: 10%
+}
 .nav-wrapper .navbar-item:hover .footer-name {
     width: 100%;
 }
@@ -87,13 +97,22 @@
     vertical-align: middle !important;
 }
 
-.book-col td {
-    width: 20%;
-    word-break: break-all;
+.book-col td:not(:nth-child(2)) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
     height: 50px;
     border-width: 0 0 1px;
+}
+
+.book-col td:nth-child(2) {
+    width: 5%;
+}
+
+.book-col td {
+    text-align: center;
 }
 
 tbody tr:nth-child(odd) {
@@ -135,3 +154,6 @@ tbody tr:nth-child(odd) {
     }
 }
 
+table {
+    table-layout: fixed;
+}
