@@ -12,6 +12,7 @@ function addData() {
     xhr.onreadystatechange = function (req, res) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             btn.removeAttribute('disabled');
+            btn.addEventListener('click', addBtn);
             var html = document.getElementsByClassName('add-element')[0];
             html.remove();
             var messge = document.getElementById('global-message');
