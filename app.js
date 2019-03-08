@@ -5,6 +5,7 @@ var request_log = require('./middlewares/request_log');
 var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var cors = require('cors');
 var app = express();
 var Api = require('./api/v1/output.js');
@@ -13,6 +14,14 @@ var indexRender = require('./router/indexRender');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(session({
+  secret: 'alita',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 100000
+  }
+}))
 // app.use(csrf({ cookie: true }));
 // 请求日志
 app.use(request_log);

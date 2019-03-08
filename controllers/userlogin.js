@@ -5,7 +5,7 @@ exports.index = function(req, res) {
     models.userModel.find({username: reqUser, psd: reqPsd}, function(err, users){
         if(users.length > 0) {
             res.status(302);
-            res.cookie('name', 'islogin', {expires: new Date(Date.now() + 10000000), httpOnly: true})
+            req.session.username = reqUser;
             res.redirect('/');
         } else {
             res.status(403);
