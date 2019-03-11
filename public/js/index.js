@@ -8,7 +8,7 @@ function addData() {
     var url = document.getElementById('uploadUrl').value.trim();
     var tags = document.getElementById('tags');
     var key = tags.options[tags.selectedIndex].value
-    if(!img  && !name && !url) {
+    if(!img || !name || !url) {
         showMessage('请填写完整', 2, 'error');
         return false;
     }

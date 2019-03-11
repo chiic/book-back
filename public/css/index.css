@@ -157,3 +157,15 @@ tbody tr:nth-child(odd) {
 table {
     table-layout: fixed;
 }
+
+#revoke {
+    position: fixed;
+    top: 200px;
+    right: 100px;
+    z-index: 1000;
+    color: #888888;
+    cursor: pointer;
+}
+#revoke:hover {
+    color: #111111;
+}

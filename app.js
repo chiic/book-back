@@ -19,7 +19,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 100000
+    maxAge: 60 * 20 * 1000
   }
 }))
 // app.use(csrf({ cookie: true }));
