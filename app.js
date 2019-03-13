@@ -10,6 +10,7 @@ var cors = require('cors');
 var app = express();
 var Api = require('./api/v1/output.js');
 var indexRender = require('./router/indexRender');
+var config = require('./config')
 // 常用中间件
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -27,7 +28,7 @@ app.use(session({
 app.use(request_log);
 // cors可请求origin配置
 var corsOptions = {
-  origin: 'http://47.102.124.163:8080',
+  origin: config.allowOrigin,
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
