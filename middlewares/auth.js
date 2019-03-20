@@ -3,7 +3,8 @@ var authToken = function() {
         if(req.session.username) {
             next();
         } else {
-            return res.redirect(302, '/login')
+            res.status(403);
+            res.json({login: 'notlogin'})
         }
     }
 }

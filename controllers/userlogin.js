@@ -4,12 +4,12 @@ exports.index = function(req, res) {
     var reqPsd = req.body.psd;
     models.userModel.find({username: reqUser, psd: reqPsd}, function(err, users){
         if(users.length > 0) {
-            res.status(302);
             req.session.username = reqUser;
-            res.redirect('/');
+            console.log(req.session)
+            res.json({login: 'islogin'})
         } else {
             res.status(403);
-            res.send({success: false});
+            res.send({login: 'notlogin'});
         }
     });
 }

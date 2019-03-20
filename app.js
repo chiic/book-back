@@ -29,7 +29,8 @@ app.use(session({
 app.use(request_log);
 // cors可请求origin配置
 var corsOptions = {
-  origin: config.allowOrigin,
+  origin: config.allowOrigin,  // 设置可跨域
+  credentials: config.credentials, // 是否允许跨域携带cookie
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -39,10 +40,13 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
 app.locals._layoutFile = 'layout.html';
 
-//路由服务
-app.use('/api/v1', cors(corsOptions), Api);
-app.use('/public', express.static('./public'));
-app.use('/', indexRender);
+// 接口
+// app.use('/api/v1', cors(corsOptions), Api);
+// app.use('/public', express.static('./public'));
+app.use('/api', cors(corsOptions), indexRender);
+
+// 使用node代理vue spa页面
+app.use('/', express.static('./public'))
 
 app.listen(config.port, config.hostname, function(err) {
   if(!err) {
