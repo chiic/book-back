@@ -1,17 +1,50 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from '../service/auth'
-const HomeComponent = () => import('@/components/home')
+const LayoutComponent = () => import('@/components/layout')
 const LoginComponent = () => import('@/components/login')
 const PagenotfoundComponent = () => import('@/components/pagenotfound')
+
+const HomeComponent = () => import('@/components/views/Home')
+const AddbookComponent = () => import('@/components/views/Addbook')
+const BooklistComponent = () => import('@/components/views/Booklist')
+const MovieComponent = () => import('@/components/views/Movie')
+const AuthComponent = () => import('@/components/views/Auth')
+
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeComponent
+      component: LayoutComponent,
+      children: [
+        {
+          path: '',
+          name: 'layoutComponent',
+          component: HomeComponent
+        },
+        {
+          path: 'addbook',
+          name: 'addbook',
+          component: AddbookComponent
+        },
+        {
+          path: 'booklist',
+          name: 'booklist',
+          component: BooklistComponent
+        },
+        {
+          path: 'movie',
+          name: 'movie',
+          component: MovieComponent
+        },
+        {
+          path: 'auth',
+          name: 'auth',
+          component: AuthComponent
+        }
+      ]
     },
     {
       path: '/login',
@@ -37,8 +70,9 @@ router.beforeEach((to, from, next) => {
         }
       }
     )
+  } else {
+    next()
   }
-  next()
 })
 
 export default router
