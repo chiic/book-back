@@ -49,6 +49,7 @@ export default {
     overflow-x: hidden;
     min-width: calc(100% - 150px);
     height: 100vh;
+    background: #eeeef3;
     overflow-y: auto;
   }
 </style>

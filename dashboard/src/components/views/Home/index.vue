@@ -1,64 +1,50 @@
 <template>
-  <el-row class="chart-main-wp" :gutter="20">
-    <el-col :xs="24" :sm="24" :lg="24">
-      <title-component></title-component>
-    </el-col>
-    <el-col :xs="24" :sm="24" :lg="12">
-      <div ref="charts1" class="chart-wrapper"></div>
-    </el-col>
-    <el-col :xs="24" :sm="24" :lg="12">
-      <div ref="charts2" class="chart-wrapper"></div>
-    </el-col>
-    <el-col :xs="24" :sm="24" :lg="24">
-      <div ref="charts3" class="chart-wrapper"></div>
-    </el-col>
-  </el-row>
+  <div class="chart-main-wp">
+    <el-row :gutter="20">
+      <el-col :xs="10" :sm="10" :md="10" :lg="6">
+        <div class="grid-content bg-purple">
+          <pie-chart></pie-chart>
+        </div>
+      </el-col>
+      <el-col :xs="10" :sm="10" :md="10" :lg="6">
+        <div class="grid-content bg-purple-light">
+          <status-chart></status-chart>
+        </div>
+      </el-col>
+      <el-col :xs="4" :sm="4" :md="4" :lg="12">
+        <div class="grid-content bg-purple">
+          <document-chart></document-chart>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 <script>
 // chart 数据
-import dataOption1 from './data1'
-import dataOption2 from './data2'
-import dataOption3 from './data3'
-import TitleComponent from './components/title.vue'
+import pieChart from './components/pieChart'
+import statusChart from './components/statusChart'
+import documentChart from './components/document'
 export default {
   name: 'home-chart',
   components: {
-    TitleComponent
+    pieChart,
+    statusChart,
+    documentChart
   },
   data () {
     return {
-      charts1: null,
-      charts2: null,
-      charts3: null
     }
   },
   mounted () {
-    const _this = this
-    _this.initChart()
-    window.onresize = function () {
-      _this.resertChart()
-    }
   },
   methods: {
-    initChart () {
-      this.charts1 = this.$echarts.init(this.$refs.charts1)
-      this.charts2 = this.$echarts.init(this.$refs.charts2)
-      this.charts3 = this.$echarts.init(this.$refs.charts3)
-      this.charts1.setOption(dataOption1)
-      this.charts2.setOption(dataOption2)
-      this.charts3.setOption(dataOption3)
-    },
-    resertChart () {
-      this.charts1.resize()
-      this.charts2.resize()
-      this.charts3.resize()
-    }
+
   }
 }
 </script>
 <style>
   .chart-main-wp {
-    padding: 20px;
+    padding: 40px 60px;
   }
   .chart-main-wp .chart-wrapper {
     width: 100%;
@@ -66,5 +52,34 @@ export default {
     box-shadow: 0 2px 2px 2px #cccccc;
     height: 300px;
     margin: 20px 0;
+  }
+  .grid-content {
+    height: 300px;
+    position: relative;
+    text-align: center;
+    background: #ffffff;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 0 1px 1px 1px #cccccc;
+  }
+  .grid-content a {
+    display: block;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+  }
+  .grid-content img {
+    position: absolute;
+    top: 26px;
+    left: 20px;
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%);
+    transition: all 0.5s;
+  }
+  .grid-content:hover {
+    box-shadow: 0 1px 1px 1px #cccccc;
+  }
+  .grid-content:hover img {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
   }
 </style>

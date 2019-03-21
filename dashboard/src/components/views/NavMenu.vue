@@ -22,6 +22,10 @@
       <i class="el-icon-setting"></i>
       <span slot="title">权限管理</span>
     </el-menu-item>
+    <el-menu-item index="5">
+      <i class="el-icon-star-on"></i>
+      <span slot="title">插件</span>
+    </el-menu-item>
 </el-menu>
 </template>
 <script>
@@ -36,7 +40,8 @@ export default {
         '/addbook',
         '/booklist',
         '/movie',
-        '/auth'
+        '/auth',
+        '/plugin'
       ]
     }
   },

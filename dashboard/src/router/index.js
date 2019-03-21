@@ -10,7 +10,7 @@ const AddbookComponent = () => import('@/components/views/Addbook')
 const BooklistComponent = () => import('@/components/views/Booklist')
 const MovieComponent = () => import('@/components/views/Movie')
 const AuthComponent = () => import('@/components/views/Auth')
-
+const PluginComponent = () => import('@/components/views/Plugin')
 Vue.use(Router)
 
 const router = new Router({
@@ -43,6 +43,11 @@ const router = new Router({
           path: 'auth',
           name: 'auth',
           component: AuthComponent
+        },
+        {
+          path: 'plugin',
+          name: 'plugin',
+          component: PluginComponent
         }
       ]
     },
