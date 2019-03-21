@@ -1,5 +1,7 @@
 <template>
-  <el-menu class="el-menu-vertical-nav" @select="select" :default-active="index">
+  <el-menu class="el-menu-vertical-nav"
+    background-color="#304156"
+    @select="select" :default-active="index">
     <el-menu-item index="0">
       <i class="el-icon-location"></i>
       <span slot="title">首页</span>
@@ -57,5 +59,11 @@ export default {
   }
   .el-menu {
     border-right: 0;
+  }
+  .el-menu-item {
+    color: #ffffff;
+  }
+  .el-menu-item.is-active {
+    color: #f16d79;
   }
 </style>

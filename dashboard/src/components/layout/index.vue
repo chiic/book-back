@@ -4,7 +4,9 @@
       <nav-menu></nav-menu>
     </div>
     <div class="right">
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -30,16 +32,23 @@ export default {
 <style>
   .ly-wrapper {
     display: flex;
+    overflow: hidden;
   }
   .ly-wrapper .left {
     height: 100vh;
     min-width: 150px;
     display: flex;
+    background: #304156;
     align-items: center;
     overflow: hidden;
+    color: #ffffff;
     border-right: 1px solid #cccccc;
   }
   .ly-wrapper .right {
     position: relative;
+    overflow-x: hidden;
+    min-width: calc(100% - 150px);
+    height: 100vh;
+    overflow-y: auto;
   }
 </style>
