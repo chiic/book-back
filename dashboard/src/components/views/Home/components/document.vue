@@ -5,12 +5,9 @@
   </div>
 </template>
 <script>
-import documentData from '../datas/document.js'
 export default {
   name: 'document',
   mounted () {
-    this.charts = this.$echarts.init(this.$refs.documents)
-    this.charts.setOption(documentData)
   }
 }
 </script>
@@ -22,6 +19,8 @@ export default {
   .third-chart-wp .title {
     height: 20px;
     text-align: left;
+    font-size: 12px;
+    font-weight: bold;
     padding: 5px 20px;
   }
   .document-chart {

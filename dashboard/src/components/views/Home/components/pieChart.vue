@@ -45,6 +45,8 @@ export default {
   }
   .first-chart-wp .title {
     height: 20px;
+    font-size: 12px;
+    font-weight: bold;
     text-align: left;
     padding: 5px 20px;
   }

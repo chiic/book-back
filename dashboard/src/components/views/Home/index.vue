@@ -1,20 +1,28 @@
 <template>
   <div class="chart-main-wp">
     <el-row :gutter="20">
-      <el-col :xs="10" :sm="10" :md="10" :lg="6">
+      <el-col :xs="10" :sm="10" :md="10" :lg="7">
         <div class="grid-content bg-purple">
           <pie-chart></pie-chart>
         </div>
       </el-col>
-      <el-col :xs="10" :sm="10" :md="10" :lg="6">
+      <el-col :xs="10" :sm="10" :md="10" :lg="7">
         <div class="grid-content bg-purple-light">
           <status-chart></status-chart>
         </div>
       </el-col>
-      <el-col :xs="4" :sm="4" :md="4" :lg="12">
+      <el-col :xs="4" :sm="4" :md="4" :lg="10">
         <div class="grid-content bg-purple">
           <document-chart></document-chart>
         </div>
+      </el-col>
+    </el-row>
+    <el-row :gutter="20" style="margin-top:20px;">
+      <el-col :span="12">
+        <weather-wp></weather-wp>
+      </el-col>
+      <el-col :span="12">
+        <book-over></book-over>
       </el-col>
     </el-row>
   </div>
@@ -24,12 +32,16 @@
 import pieChart from './components/pieChart'
 import statusChart from './components/statusChart'
 import documentChart from './components/document'
+import weatherWp from './components/weather'
+import bookOver from './components/bookOver'
 export default {
   name: 'home-chart',
   components: {
     pieChart,
     statusChart,
-    documentChart
+    documentChart,
+    weatherWp,
+    bookOver
   },
   data () {
     return {

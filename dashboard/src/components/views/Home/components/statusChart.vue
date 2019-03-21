@@ -28,7 +28,9 @@ export default {
   }
   .second-chart-wp .title {
     height: 20px;
+    font-size: 12px;
     text-align: left;
+    font-weight: bold;
     padding: 5px 20px;
   }
   .pip-wp-second {

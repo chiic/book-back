@@ -1,4 +1,11 @@
 const option = {
+  title: {
+    text: '书籍收藏概览',
+    textStyle: {
+      fontSize: 12
+    },
+    padding: [5, 20]
+  },
   color: ['#3398DB'],
   tooltip: {
     trigger: 'axis',
@@ -14,7 +21,7 @@ const option = {
   },
   xAxis: [{
     type: 'category',
-    data: ['pdf', '视频', '音频', '源文件'],
+    data: ['java', 'c/c++', 'javascript', 'python', 'go', '其他'],
     axisTick: {
       alignWithLabel: true
     }
@@ -26,7 +33,7 @@ const option = {
     name: '直接访问',
     type: 'bar',
     barWidth: '60%',
-    data: [100, 52, 200, 334]
+    data: [100, 52, 200, 334, 20, 30]
   }]
 }
 
