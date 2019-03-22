@@ -51,5 +51,7 @@ export default {
     height: 100vh;
     background: #eeeef3;
     overflow-y: auto;
+    display: flex;
+    align-items: center;
   }
 </style>

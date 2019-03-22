@@ -66,9 +66,9 @@ export default {
     border-right: 0;
   }
   .el-menu-item {
-    color: #ffffff;
+    color: #ffffff !important;
   }
   .el-menu-item.is-active {
-    color: #f16d79;
+    color: #d1969b !important;
   }
 </style>

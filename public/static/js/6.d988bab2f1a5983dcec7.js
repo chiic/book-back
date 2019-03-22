@@ -1,0 +1,2 @@
+webpackJsonp([6],{maGK:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var l={render:function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("booklist")])},staticRenderFns:[]},r=n("/4AN")(null,l,!1,null,null,null);t.default=r.exports}});
+//# sourceMappingURL=6.d988bab2f1a5983dcec7.js.map

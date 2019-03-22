@@ -1,0 +1,2 @@
+webpackJsonp([4],{dUCW:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var l={render:function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("\n  Plugin\n")])},staticRenderFns:[]},r=t("/4AN")({name:"plugin"},l,!1,null,null,null);n.default=r.exports}});
+//# sourceMappingURL=4.5b013539fc073fd65dc9.js.map
