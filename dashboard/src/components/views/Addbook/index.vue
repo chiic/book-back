@@ -1,6 +1,7 @@
 <template>
   <div class="add-book-wrapper">
     <el-form :label-position="labelPosition"
+      class="form-add"
       ref="bookForm"
       :rules="rules"
       label-width="80px"
@@ -86,7 +87,13 @@ export default {
 <style>
   .add-book-wrapper {
     width: 400px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
     margin: 40px auto 0;
+  }
+  .add-book-wrapper .form-add {
+    width: 100%;
   }
   .el-form--label-top .el-form-item__label {
     padding: 0;

@@ -57,7 +57,6 @@ export default {
 <style>
   .chart-main-wp {
     padding: 40px 60px;
-    width: 100%;
   }
   .chart-main-wp .chart-wrapper {
     width: 100%;

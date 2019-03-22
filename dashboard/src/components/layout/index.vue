@@ -47,11 +47,9 @@ export default {
   .ly-wrapper .right {
     position: relative;
     overflow-x: hidden;
-    min-width: calc(100% - 150px);
+    width: calc(100% - 150px);
     height: 100vh;
     background: #eeeef3;
     overflow-y: auto;
-    display: flex;
-    align-items: center;
   }
 </style>

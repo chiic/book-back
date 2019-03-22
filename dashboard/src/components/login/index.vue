@@ -39,7 +39,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$http.post('http://localhost:3001/api/back/login', this.Form)
+          this.$http.post('/api/back/login', this.Form)
             .then(res => {
               if (res.data.login === 'islogin') {
                 this.$router.push('/')
