@@ -10,6 +10,7 @@ var cors = require('cors');
 var app = express();
 var Api = require('./api/v1/output.js');
 var indexRender = require('./router/indexRender');
+var osRender = require('./router/osRender');
 // 开启数据库
 require('./models/start_mongo');
 // 常用中间件
@@ -40,11 +41,11 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
 app.locals._layoutFile = 'layout.html';
 
-// 接口
+// api接口
 // app.use('/api/v1', cors(corsOptions), Api);
 // app.use('/public', express.static('./public'));
 app.use('/api', cors(corsOptions), indexRender);
-
+app.use('/os', cors(corsOptions), osRender);
 // 使用node代理vue spa页面
 app.use('/', express.static('./public'))
 

@@ -1,6 +1,9 @@
 <template>
   <div class="weather-wp">
-    <div class="is-at-city">您当前所在城市为：{{currentCity}}</div>
+    <div class="is-at-city">
+      <img src="/static/img/City.png" style="vertical-align: middle">{{currentCity}}
+      <img src="/static/img/weather.png" style="vertical-align: middle">{{currentWeather}}
+    </div>
     <div class="weather-chart" ref="weather"></div>
   </div>
 </template>
@@ -20,6 +23,8 @@ export default {
             const weather = new AMap.Weather()
             weather.getForecast(result.city, function (err, data) {
               if (!err) {
+                console.log(data)
+                _this.currentWeather = data.forecasts[0].dayWeather
                 _this.forecasts = data.forecasts
               }
             })
@@ -31,6 +36,7 @@ export default {
   data () {
     return {
       currentCity: '',
+      currentWeather: '',
       forecasts: [],
       charts: null
     }
