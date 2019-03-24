@@ -5,7 +5,6 @@ exports.index = function(req, res) {
     models.userModel.find({username: reqUser, psd: reqPsd}, function(err, users){
         if(users.length > 0) {
             req.session.username = reqUser;
-            console.log(req.session)
             res.json({login: 'islogin'})
         } else {
             res.status(403);
