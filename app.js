@@ -10,7 +10,7 @@ var cors = require('cors');
 var app = express();
 var Api = require('./api/v1/output.js');
 var indexRender = require('./router/indexRender');
-// var osRender = require('./router/osRender');
+var osRender = require('./router/osRender');
 // 开启数据库
 require('./models/start_mongo');
 // 常用中间件
