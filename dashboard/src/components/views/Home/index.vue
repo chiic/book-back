@@ -1,5 +1,5 @@
 <template>
-  <div class="chart-main-wp">
+  <div class="chart-main-wp" :key="key">
     <el-row :gutter="20">
       <el-col :xs="10" :sm="10" :md="10" :lg="7">
         <div class="grid-content bg-purple">
@@ -45,12 +45,15 @@ export default {
   },
   data () {
     return {
+      key: 1
     }
   },
   mounted () {
+    window.addEventListener('resize', () => {
+      this.key++
+    })
   },
   methods: {
-
   }
 }
 </script>

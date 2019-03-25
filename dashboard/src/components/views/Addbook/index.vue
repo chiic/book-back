@@ -26,8 +26,8 @@
         </el-select>
       </el-form-item>
       <el-form-item class="btn-wrapper">
-        <el-button type="primary" @click="onSubmit('bookForm')" plain>添加</el-button>
-        <el-button type="warning" @click="resetForm('bookForm')" plain>取消</el-button>
+        <el-button type="primary" @click="onSubmit('bookForm')" plain class="add">添加</el-button>
+        <el-button type="warning" @click="resetForm('bookForm')" plain class="add">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     onSubmit (bookForm) {
-      this.$refs['bookForm'].validate(valid => {
+      this.$refs[bookForm].validate(valid => {
         if (valid) {
           addBook(this.formLabelAlign).then(
             res => {
@@ -98,13 +98,10 @@ export default {
   .el-form--label-top .el-form-item__label {
     padding: 0;
   }
-  .el-form-item {
-    margin-bottom: 10px;
-  }
   .el-select {
     width: 100%;
   }
-  .el-button {
+  .el-button.add {
     width: 40%;
   }
   .el-button+.el-button {

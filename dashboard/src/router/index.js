@@ -10,6 +10,8 @@ const AddbookComponent = () => import('@/components/views/Addbook')
 const BooklistComponent = () => import('@/components/views/Booklist')
 const MovieComponent = () => import('@/components/views/Movie')
 const AuthComponent = () => import('@/components/views/Auth')
+const AuthLayoutComponent = () => import('@/components/views/Auth/layout')
+const AuthAddComponent = () => import('@/components/views/Auth/components/addRole')
 const PluginComponent = () => import('@/components/views/Plugin')
 Vue.use(Router)
 
@@ -41,8 +43,16 @@ const router = new Router({
         },
         {
           path: 'auth',
-          name: 'auth',
-          component: AuthComponent
+          component: AuthLayoutComponent,
+          children: [{
+            path: '',
+            name: 'auth',
+            component: AuthComponent
+          }, {
+            path: 'add',
+            name: 'auth-add',
+            component: AuthAddComponent
+          }]
         },
         {
           path: 'plugin',
