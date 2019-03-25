@@ -75,9 +75,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
-    next()
-  } else {
+  if (to.path === '/') {
     auth().then(
       res => {
         if (res.data.islogin) {
@@ -87,6 +85,8 @@ router.beforeEach((to, from, next) => {
         }
       }
     )
+  } else {
+    next()
   }
 })
 

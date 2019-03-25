@@ -26,6 +26,9 @@ export default {
     toggleMenu () {
       this.isCollapse = !this.isCollapse
     }
+  },
+  mounted () {
+    console.log(this.$router)
   }
 }
 </script>

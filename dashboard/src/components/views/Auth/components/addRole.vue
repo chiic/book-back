@@ -5,10 +5,10 @@
         <el-input v-model="formAdd.username" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="psd">
-        <el-input v-model="formAdd.psd" autocomplete="off" type="password"></el-input>
+        <el-input v-model="formAdd.psd" autocomplete="new-password" type="password"></el-input>
       </el-form-item>
       <el-form-item label="确认密码" prop="repsd">
-        <el-input v-model="formAdd.repsd" autocomplete="off" type="password"></el-input>
+        <el-input v-model="formAdd.repsd" autocomplete="new-password" type="password"></el-input>
       </el-form-item>
       <el-form-item label="角色" prop="roleName">
         <el-select v-model="formAdd.roleName" placeholder="请选择角色类型">
