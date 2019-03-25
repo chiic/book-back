@@ -9,6 +9,3 @@ var rolesSchema = require('./roles');
 exports.booklistModel = new Model('Booklist', booklistSchema);
 exports.userModel = new Model('User', userSchema);
 exports.rolesModel = new Model('Roles', rolesSchema);
-
-
-

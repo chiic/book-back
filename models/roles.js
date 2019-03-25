@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var rolesSchema = new Schema({
     username: String,
     psd: String,
-    role: String
+    roleName: String
 })
 
 module.exports = rolesSchema;

@@ -24,13 +24,15 @@
   </div>
 </template>
 <script>
+import { addRole } from '@/service/role'
+import cloneDeep from 'lodash/cloneDeep'
 export default {
   name: 'add-role',
   data () {
     var repsdfn = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
-      } else if (value !== this.rules.psd) {
+      } else if (value !== this.formAdd.psd) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
@@ -54,7 +56,7 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' }
         ],
         repsd: [
-          { required: true, validator: repsdfn, trigger: 'blur' }
+          { validator: repsdfn, trigger: 'blur' }
         ]
       }
     }
@@ -67,7 +69,15 @@ export default {
     onSubmit () {
       this.$refs['form_add'].validate(valid => {
         if (valid) {
-          // this.emit('changeRole', this.form)
+          console.log(111111)
+          let data = cloneDeep(this.formAdd)
+          delete data.repsd
+          console.log(data)
+          addRole(data).then(
+            res => {
+              console.log(res.data)
+            }
+          )
         } else {
           return false
         }

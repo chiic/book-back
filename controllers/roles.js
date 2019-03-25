@@ -10,11 +10,13 @@ exports.getRoles = function(req, res, next) {
 
 exports.changeRole = function(req, res, next) {
     models.rolesModel.updateOne(
-        req.body._id,
+        { _id: req.body._id },
         req.body,
         function(err, role) {
             if(!err) {
                 res.json({success: true});
+            } else {
+                console.log(err)
             }
         }
     )

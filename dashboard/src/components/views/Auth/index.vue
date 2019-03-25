@@ -9,7 +9,7 @@
           label="用户名">
         </el-table-column>
         <el-table-column
-          prop="roleName"
+          prop="roleName | changeEn"
           label="角色">
         </el-table-column>
         <el-table-column label="操作">
@@ -45,23 +45,13 @@
   </div>
 </template>
 <script>
+import { getRoles, changeRole } from '@/service/role'
 export default {
   name: 'auth-com',
   data () {
     return {
-      tableData: [{
-        username: 'admin',
-        role: 'admin',
-        roleName: '管理员'
-      }, {
-        username: 'editor',
-        role: 'user',
-        roleName: '普通用户'
-      }],
-      formChange: {
-        username: '',
-        roleName: ''
-      },
+      tableData: [],
+      formChange: {},
       rules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' }
@@ -79,9 +69,46 @@ export default {
       this.dialogFormVisible = true
     },
     handleDelete (index) {},
-    closeDialog (formName) {
-      this.$refs[formName].resetFields()
+    closeDialog () {
+      this.$refs['form'].resetFields()
       this.dialogFormVisible = false
+    },
+    changeRole () {
+      this.$refs['form'].validate(valid => {
+        if (valid) {
+          changeRole(this.formChange).then(
+            res => {
+              if (res.data && res.data.success) {
+                this.dialogFormVisible = false
+                this.$message('修改成功')
+                this.initRoles()
+              }
+            }
+          )
+        } else {
+          return false
+        }
+      })
+    },
+    initRoles () {
+      getRoles().then(res => {
+        if (res.data) {
+          this.tableData = res.data
+        }
+      })
+    }
+  },
+  mounted () {
+    this.initRoles()
+  },
+  filters: {
+    changeEn (value) {
+      switch (value) {
+        case 'admin':
+          return '管理员'
+        case 'user':
+          return '普通用户'
+      }
     }
   }
 }
