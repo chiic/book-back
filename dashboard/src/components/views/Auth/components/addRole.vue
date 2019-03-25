@@ -69,13 +69,14 @@ export default {
     onSubmit () {
       this.$refs['form_add'].validate(valid => {
         if (valid) {
-          console.log(111111)
           let data = cloneDeep(this.formAdd)
           delete data.repsd
-          console.log(data)
           addRole(data).then(
             res => {
-              console.log(res.data)
+              if (res.data && res.data.success) {
+                this.$message('添加成功')
+                this.$refs['form_add'].resetFields()
+              }
             }
           )
         } else {

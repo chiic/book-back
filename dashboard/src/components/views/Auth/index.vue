@@ -2,14 +2,14 @@
   <div class="auth-wrapper">
     <div class="auth-add">
       <el-table
-      :data="tableData"
+      :data="tableData | filterData"
       style="width: 100%">
         <el-table-column
           prop="username"
           label="用户名">
         </el-table-column>
         <el-table-column
-          prop="roleName | changeEn"
+          prop="roleName"
           label="角色">
         </el-table-column>
         <el-table-column label="操作">
@@ -100,16 +100,6 @@ export default {
   },
   mounted () {
     this.initRoles()
-  },
-  filters: {
-    changeEn (value) {
-      switch (value) {
-        case 'admin':
-          return '管理员'
-        case 'user':
-          return '普通用户'
-      }
-    }
   }
 }
 </script>
