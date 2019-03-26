@@ -13,6 +13,7 @@ const AuthComponent = () => import('@/components/views/Auth')
 const AuthLayoutComponent = () => import('@/components/views/Auth/layout')
 const AuthAddComponent = () => import('@/components/views/Auth/components/addRole')
 const PluginComponent = () => import('@/components/views/Plugin')
+
 Vue.use(Router)
 
 const router = new Router({
@@ -42,19 +43,6 @@ const router = new Router({
           component: MovieComponent
         },
         {
-          path: 'auth',
-          component: AuthLayoutComponent,
-          children: [{
-            path: '',
-            name: 'auth',
-            component: AuthComponent
-          }, {
-            path: 'add',
-            name: 'auth-add',
-            component: AuthAddComponent
-          }]
-        },
-        {
           path: 'plugin',
           name: 'plugin',
           component: PluginComponent
@@ -67,27 +55,60 @@ const router = new Router({
       component: LoginComponent
     },
     {
-      path: '*',
+      path: '/404',
       name: 'pagenotfound',
       component: PagenotfoundComponent
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
   ]
 })
 
+const asyncRoutes = [{
+  path: '/',
+  component: LayoutComponent,
+  children: [{
+    path: 'auth',
+    component: AuthLayoutComponent,
+    children: [{
+      path: '',
+      name: 'auth',
+      component: AuthComponent
+    }, {
+      path: 'add',
+      name: 'auth-add',
+      component: AuthAddComponent
+    }]
+  }]
+}]
+
+let pushFlag = false
 router.beforeEach((to, from, next) => {
-  if (to.path === '/') {
-    auth().then(
-      res => {
-        if (res.data.islogin) {
+  auth().then(
+    res => {
+      if (res.data && res.data.islogin) {
+        if (to.path === '/login') {
+          next('/')
+        } else {
+          if (!pushFlag && res.data.role === 'admin') {
+            router.addRoutes(asyncRoutes)
+            pushFlag = true
+            next({...to, replace: true})
+          } else {
+            next()
+          }
+        }
+      } else {
+        if (to.path === '/login') {
           next()
         } else {
           next('/login')
         }
       }
-    )
-  } else {
-    next()
-  }
+    }
+  )
 })
 
 export default router

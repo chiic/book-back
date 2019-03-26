@@ -2,7 +2,7 @@
   <div class="auth-wrapper">
     <div class="auth-add">
       <el-table
-      :data="tableData | filterData"
+      :data="tableData"
       style="width: 100%">
         <el-table-column
           prop="username"

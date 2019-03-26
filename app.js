@@ -28,7 +28,7 @@ app.use(session({
 }))
 // app.use(csrf({ cookie: true }));
 // 请求日志
-app.use(request_log);
+// app.use(request_log);
 // cors可请求origin配置
 var corsOptions = {
   origin: config.allowOrigin,  // 设置可跨域
