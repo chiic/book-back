@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import auth from '../service/auth'
+import store from '../store'
 const LayoutComponent = () => import('@/components/layout')
 const LoginComponent = () => import('@/components/login')
 const PagenotfoundComponent = () => import('@/components/pagenotfound')
@@ -15,76 +16,83 @@ const AuthAddComponent = () => import('@/components/views/Auth/components/addRol
 const PluginComponent = () => import('@/components/views/Plugin')
 Vue.use(Router)
 
-const router = new Router({
-  routes: [
-    {
-      path: '/',
-      component: LayoutComponent,
-      children: [
-        {
-          path: '',
-          name: 'layoutComponent',
-          component: HomeComponent
-        },
-        {
-          path: 'addbook',
-          name: 'addbook',
-          component: AddbookComponent
-        },
-        {
-          path: 'booklist',
-          name: 'booklist',
-          component: BooklistComponent
-        },
-        {
-          path: 'movie',
-          name: 'movie',
-          component: MovieComponent
-        },
-        {
-          path: 'plugin',
-          name: 'plugin',
-          component: PluginComponent
-        }
-      ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: LoginComponent
-    },
-    {
-      path: '/404',
-      name: 'pagenotfound',
-      component: PagenotfoundComponent
-    }
-  ]
-})
-
+export const commonRoutes = [
+  {
+    path: '/',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        menuname: '首页',
+        name: 'layoutComponent',
+        component: HomeComponent
+      },
+      {
+        path: 'addbook',
+        name: 'addbook',
+        menuname: '书籍添加',
+        component: AddbookComponent
+      },
+      {
+        path: 'booklist',
+        name: 'booklist',
+        menuname: '书籍列表',
+        component: BooklistComponent
+      },
+      {
+        path: 'movie',
+        name: 'movie',
+        menuname: '电影爬虫',
+        component: MovieComponent
+      },
+      {
+        path: 'plugin',
+        name: 'plugin',
+        menuname: '插件',
+        component: PluginComponent
+      }
+    ]
+  }
+]
 const asyncRoutes = [{
-  path: '/',
-  component: LayoutComponent,
+  path: 'auth',
+  menuname: '权限管理',
+  component: AuthLayoutComponent,
   children: [{
-    path: 'auth',
-    component: AuthLayoutComponent,
-    children: [{
-      path: '',
-      name: 'auth',
-      component: AuthComponent
-    }, {
-      path: 'add',
-      name: 'auth-add',
-      component: AuthAddComponent
-    }]
+    path: '',
+    name: 'auth',
+    menuname: '管理首页',
+    component: AuthComponent
+  }, {
+    path: 'add',
+    name: 'auth-add',
+    menuname: '权限添加',
+    component: AuthAddComponent
   }]
 }]
 
 const pageNotRoute = [
   {
     path: '*',
-    redirect: '/404'
+    redirect: '/404',
+    hidden: true
   }
 ]
+
+const router = new Router({
+  routes: [{
+    path: '/login',
+    name: 'login',
+    hidden: true,
+    component: LoginComponent
+  },
+  {
+    path: '/404',
+    name: 'pagenotfound',
+    hidden: true,
+    component: PagenotfoundComponent
+  }]
+})
 
 let pushFlag = false
 router.beforeEach((to, from, next) => {
@@ -95,13 +103,20 @@ router.beforeEach((to, from, next) => {
           next('/')
         } else {
           if (!pushFlag && res.data.role === 'admin') {
-            router.addRoutes([...asyncRoutes, ...pageNotRoute])
-            pushFlag = true
-            next({...to, replace: true})
+            commonRoutes[0].children.push(asyncRoutes[0])
+            store.dispatch('dispatchRoutes', commonRoutes)
+              .then(res => {
+                router.addRoutes([...commonRoutes, ...pageNotRoute])
+                pushFlag = true
+                next({...to, replace: true})
+              })
           } else if (!pushFlag && res.data.role === 'user') {
-            router.addRoutes(pageNotRoute)
-            pushFlag = true
-            next({...to, replace: true})
+            store.dispatch('dispatchRoutes', commonRoutes)
+              .then(res => {
+                router.addRoutes([...commonRoutes, ...pageNotRoute])
+                pushFlag = true
+                next({...to, replace: true})
+              })
           } else {
             next()
           }

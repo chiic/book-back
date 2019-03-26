@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'
 import axios from 'axios'
 import echarts from 'echarts'
 import 'element-ui/lib/theme-chalk/index.css'
+import store from './store'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 axios.defaults.withCredentials = true
@@ -16,6 +17,7 @@ Vue.prototype.$echarts = echarts
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

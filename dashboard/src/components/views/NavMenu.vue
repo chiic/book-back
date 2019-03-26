@@ -2,35 +2,26 @@
   <el-menu class="el-menu-vertical-nav"
     background-color="#304156"
     @select="select" :default-active="$route.path">
-    <el-menu-item index="/">
-      <i class="el-icon-location"></i>
-      <span slot="title">首页</span>
-    </el-menu-item>
-    <el-menu-item index="/addbook">
-      <i class="el-icon-menu"></i>
-      <span slot="title">书籍添加</span>
-    </el-menu-item>
-    <el-menu-item index="/booklist">
-      <i class="el-icon-document"></i>
-      <span slot="title">书籍列表</span>
-    </el-menu-item>
-    <el-menu-item index="/movie">
-      <i class="el-icon-document"></i>
-      <span slot="title">电影爬虫</span>
-    </el-menu-item>
-    <el-submenu index="4">
-      <template slot="title">
-        <i class="el-icon-setting"></i>
-        <span>权限管理</span>
+    <template v-for="item in getRoutesmapChildren">
+      <template v-if="item.children && item.children.length > 0">
+        <el-submenu :index="`/${item.path}`" :key="item.menuname">
+          <template slot="title">
+            <i class="el-icon-setting"></i>
+            <span>{{item.menuname}}</span>
+          </template>
+          <el-menu-item v-for="i in item.children"
+            :index="`/${item.path}/${i.path}`"
+            :key="i.menuname">{{i.menuname}}</el-menu-item>
+        </el-submenu>
       </template>
-      <el-menu-item index="/auth">管理首页</el-menu-item>
-      <el-menu-item index="/auth/add">添加用户</el-menu-item>
-    </el-submenu>
-    <el-menu-item index="/plugin">
-      <i class="el-icon-star-on"></i>
-      <span slot="title">插件</span>
-    </el-menu-item>
-</el-menu>
+      <template v-else>
+        <el-menu-item :index="`/${item.path}`" :key="item.menu">
+          <i class="el-icon-document"></i>
+          <span slot="title">{{item.menuname}}</span>
+        </el-menu-item>
+      </template>
+    </template>
+  </el-menu>
 </template>
 <script>
 export default {
@@ -38,6 +29,11 @@ export default {
   props: ['isCollapse'],
   data () {
     return {
+    }
+  },
+  computed: {
+    getRoutesmapChildren () {
+      return this.$store.getters.getRoutesmap[0].children
     }
   },
   methods: {
