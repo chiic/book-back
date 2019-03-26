@@ -17,3 +17,17 @@ exports.index = function(req, res) {
 exports.render = function(req, res) {
     res.render('login', {title: '登录页'});
 }
+
+exports.loginOut = function(req, res, next) {
+    req.session.destroy(function(err) {
+        if(!err) {
+            res.json({
+                success: true
+            });
+        } else {
+            res.json({
+                success: false
+            });
+        }
+    })
+}

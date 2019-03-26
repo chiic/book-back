@@ -8,7 +8,7 @@ var authToken = require('../controllers/auth');
 
 // 登录api
 router.post('/back/login', userlogin.index);
-
+router.get('/back/loginout', userlogin.loginOut);
 // 权限验证
 router.get('/back/islogin', authToken.index);
 // 添加书籍

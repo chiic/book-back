@@ -4,6 +4,14 @@
       <nav-menu></nav-menu>
     </div>
     <div class="right">
+      <el-dropdown trigger="click" class="title-top" @command="handleCommand">
+        <span class="el-dropdown-link">
+        {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
+      </span>
+      <el-dropdown-menu slot="dropdown">
+        <el-dropdown-item icon="el-icon-delete" command="loginout">登出</el-dropdown-item>
+      </el-dropdown-menu>
+      </el-dropdown>
       <keep-alive>
         <router-view />
       </keep-alive>
@@ -12,23 +20,30 @@
 </template>
 <script>
 import NavMenu from '../views/NavMenu.vue'
+import { mapGetters } from 'vuex'
+import { loginOut } from '@/service/auth'
 export default {
   name: 'layout',
   components: {
     NavMenu
   },
-  data () {
-    return {
-      isCollapse: false
-    }
+  computed: {
+    ...mapGetters([
+      'userName'
+    ])
   },
   methods: {
-    toggleMenu () {
-      this.isCollapse = !this.isCollapse
+    handleCommand (command) {
+      if (command === 'loginout') {
+        loginOut().then(
+          res => {
+            if (res.data && res.data.success) {
+              location.reload()
+            }
+          }
+        )
+      }
     }
-  },
-  mounted () {
-    console.log(this.$router)
   }
 }
 </script>
@@ -54,5 +69,16 @@ export default {
     height: 100vh;
     background: #eeeef3;
     overflow-y: auto;
+  }
+  .ly-wrapper .right .title-top {
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    right: 20px;
+    top:0;
+  }
+  .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
   }
 </style>

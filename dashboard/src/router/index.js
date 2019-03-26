@@ -102,6 +102,7 @@ router.beforeEach((to, from, next) => {
         if (to.path === '/login') {
           next('/')
         } else {
+          store.dispatch('dispatchUsername', {username: res.data.username})
           if (!pushFlag && res.data.role === 'admin') {
             commonRoutes[0].children.push(asyncRoutes[0])
             store.dispatch('dispatchRoutes', commonRoutes)

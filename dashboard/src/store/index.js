@@ -4,16 +4,23 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    routesMap: []
+    routesMap: [],
+    userName: ''
   },
   getters: {
     getRoutesmap (state) {
       return state.routesMap
+    },
+    userName (state) {
+      return state.userName
     }
   },
   mutations: {
     GETROUTES (state, data) {
       state.routesMap = data
+    },
+    SETUSERNAME (state, data) {
+      state.userName = data.username
     }
   },
   actions: {
@@ -22,6 +29,9 @@ export default new Vuex.Store({
         commit('GETROUTES', data)
         resolve()
       })
+    },
+    dispatchUsername ({commit}, data) {
+      commit('SETUSERNAME', data)
     }
   }
 })
