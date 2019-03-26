@@ -13,7 +13,6 @@ const AuthComponent = () => import('@/components/views/Auth')
 const AuthLayoutComponent = () => import('@/components/views/Auth/layout')
 const AuthAddComponent = () => import('@/components/views/Auth/components/addRole')
 const PluginComponent = () => import('@/components/views/Plugin')
-
 Vue.use(Router)
 
 const router = new Router({
@@ -58,10 +57,6 @@ const router = new Router({
       path: '/404',
       name: 'pagenotfound',
       component: PagenotfoundComponent
-    },
-    {
-      path: '*',
-      redirect: '/404'
     }
   ]
 })
@@ -84,6 +79,13 @@ const asyncRoutes = [{
   }]
 }]
 
+const pageNotRoute = [
+  {
+    path: '*',
+    redirect: '/404'
+  }
+]
+
 let pushFlag = false
 router.beforeEach((to, from, next) => {
   auth().then(
@@ -93,7 +95,11 @@ router.beforeEach((to, from, next) => {
           next('/')
         } else {
           if (!pushFlag && res.data.role === 'admin') {
-            router.addRoutes(asyncRoutes)
+            router.addRoutes([...asyncRoutes, ...pageNotRoute])
+            pushFlag = true
+            next({...to, replace: true})
+          } else if (!pushFlag && res.data.role === 'user') {
+            router.addRoutes(pageNotRoute)
             pushFlag = true
             next({...to, replace: true})
           } else {
