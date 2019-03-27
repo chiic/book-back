@@ -13,7 +13,7 @@
               <el-table-column prop="key" label="关键词"></el-table-column>
               <el-table-column prop="name" label="名称"></el-table-column>
               <el-table-column align="right">
-                <template slot="header">
+                <template slot="header" slot-scope="scope">
                   <el-input v-model="item.search" size="mini" placeholder="输入关键字搜索"/>
                 </template>
                 <template slot-scope="scope">
@@ -40,7 +40,7 @@
       <span>文件上传格式必须为JSON文件</span>
       <el-upload
         class="upload-demo"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="/api/upload"
         :on-change="handleChange"
         accept=".json"
         :file-list="fileList">

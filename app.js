@@ -18,6 +18,7 @@ require('./models/start_mongo');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
 app.use(session({
   secret: 'alita',
   resave: false,
