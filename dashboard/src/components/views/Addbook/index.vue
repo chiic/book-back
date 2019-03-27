@@ -34,11 +34,12 @@
 
 </template>
 <script>
-import addBook from '@/service/bookService.js'
+import { addBook, getbook, changeBook } from '@/service/bookService.js'
 export default {
   data () {
     return {
       labelPosition: 'top',
+      iseditor: false,
       formLabelAlign: {
         img: '',
         name: '',
@@ -65,14 +66,27 @@ export default {
     onSubmit (bookForm) {
       this.$refs[bookForm].validate(valid => {
         if (valid) {
-          addBook(this.formLabelAlign).then(
-            res => {
-              if (res.data && res.data.success) {
-                this.$message('添加成功')
-                this.resetForm(bookForm)
+          if (!this.iseditor) {
+            addBook(this.formLabelAlign).then(
+              res => {
+                if (res.data && res.data.success) {
+                  this.$message('添加成功')
+                  this.resetForm(bookForm)
+                  this.$router.push('/booklist')
+                }
               }
-            }
-          )
+            )
+          } else {
+            changeBook(this.formLabelAlign).then(
+              res => {
+                if (res.data && res.data.success) {
+                  this.$message('更新成功')
+                  this.resetForm(bookForm)
+                  this.$router.push('/booklist')
+                }
+              }
+            )
+          }
         } else {
           return false
         }
@@ -83,8 +97,13 @@ export default {
     }
   },
   mounted () {
-    if (this.$route && this.$route.params) {
-      console.log(this.$route.params)
+    if (this.$route.params && this.$route.params.id) {
+      this.iseditor = true
+      getbook(this.$route.params.id).then(
+        res => {
+          this.formLabelAlign = res.data
+        }
+      )
     }
   }
 }

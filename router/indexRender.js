@@ -19,6 +19,9 @@ router.delete('/back/removebook', booklistApi.removeBook);
 router.put('/back/updatebook', booklistApi.updatebook);
 // 获取书籍列表
 router.get('/back/booklist', booklistApi.getBooklist);
+// 获取某一个id对应的书籍信息
+router.get('/back/getbook', booklistApi.getbook);
+
 // 概览页面
 // router.get('/overview', overviewPage.render)
 

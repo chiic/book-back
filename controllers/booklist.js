@@ -35,8 +35,9 @@ exports.getBooklist = function (req, res) {
 }
 
 exports.updatebook = function (req, res) {
+    console.log(req.body)
     models.booklistModel.updateOne(
-        req.body._id,
+        {_id: req.body._id},
         req.body,
         function (err, doc) {
             if (!err) {
@@ -45,6 +46,14 @@ exports.updatebook = function (req, res) {
                 });
             }
         })
+}
+
+exports.getbook = function(req, res) {
+    models.booklistModel.findById(req.query, function(err, data) {
+        if(!err) {
+            res.json(data)
+        }
+    })
 }
 
 exports.getSourcelist = function (req, res) {

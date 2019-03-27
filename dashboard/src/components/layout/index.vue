@@ -12,9 +12,7 @@
         <el-dropdown-item icon="el-icon-delete" command="loginout">登出</el-dropdown-item>
       </el-dropdown-menu>
       </el-dropdown>
-      <keep-alive>
-        <router-view />
-      </keep-alive>
+      <router-view />
     </div>
   </div>
 </template>

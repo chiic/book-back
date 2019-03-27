@@ -30,7 +30,7 @@ export const commonRoutes = [
       {
         path: 'addbook',
         name: 'addbook',
-        menuname: '书籍添加',
+        hidden: true,
         component: AddbookComponent
       },
       {

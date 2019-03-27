@@ -6,7 +6,7 @@ import axios from 'axios'
  * @param {*} bookdata: Object
  * @returns Promise
  */
-export default function addBook (bookdata) {
+export function addBook (bookdata) {
   return axios.post('/api/back/addbook', bookdata)
 }
 
@@ -38,4 +38,15 @@ export function changeBook (bookdata) {
  */
 export function removebook (id) {
   return axios.delete('/api/back/removebook', id)
+}
+
+/**
+ *
+ *
+ * @export
+ * @param {*} _id
+ * @returns
+ */
+export function getbook (_id) {
+  return axios.get('/api/back/getbook', {params: { _id }})
 }
