@@ -3,22 +3,24 @@
     background-color="#304156"
     @select="select" :default-active="$route.path">
     <template v-for="item in getRoutesmapChildren">
-      <template v-if="item.children && item.children.length > 0">
-        <el-submenu :index="`/${item.path}`" :key="item.menuname">
-          <template slot="title">
-            <i class="el-icon-setting"></i>
-            <span>{{item.menuname}}</span>
-          </template>
-          <el-menu-item v-for="i in item.children"
-            :index="`/${item.path}/${i.path}`"
-            :key="i.menuname">{{i.menuname}}</el-menu-item>
-        </el-submenu>
-      </template>
-      <template v-else>
-        <el-menu-item :index="`/${item.path}`" :key="item.menu">
-          <i class="el-icon-document"></i>
-          <span slot="title">{{item.menuname}}</span>
-        </el-menu-item>
+      <template v-if="!item.hidden">
+        <template v-if="item.children && item.children.length > 0">
+          <el-submenu :index="`/${item.path}`" :key="item.menuname">
+            <template slot="title">
+              <i class="el-icon-setting"></i>
+              <span>{{item.menuname}}</span>
+            </template>
+            <el-menu-item v-for="i in item.children"
+              :index="`/${item.path}/${i.path}`"
+              :key="i.menuname">{{i.menuname}}</el-menu-item>
+          </el-submenu>
+        </template>
+        <template v-else>
+          <el-menu-item :index="`/${item.path}`" :key="item.menu">
+            <i class="el-icon-document"></i>
+            <span slot="title">{{item.menuname}}</span>
+          </el-menu-item>
+        </template>
       </template>
     </template>
   </el-menu>

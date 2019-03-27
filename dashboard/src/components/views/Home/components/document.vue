@@ -81,14 +81,14 @@ export default {
     width: 100%;
     height: 250px;
   }
-  .el-table .warning-row {
+  .third-chart-wp .el-table .warning-row {
     background: oldlace;
   }
 
-  .el-table .success-row {
+  .third-chart-wp .el-table .success-row {
     background: #f0f9eb;
   }
-  .el-table .cell {
+  .third-chart-wp .el-table .cell {
     white-space: nowrap;
   }
   .el-table td, .el-table th {

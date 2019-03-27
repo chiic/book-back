@@ -17,7 +17,8 @@ router.post('/back/addbook', booklistApi.addBook);
 router.delete('/back/removebook', booklistApi.removeBook);
 // 更新书籍
 router.put('/back/updatebook', booklistApi.updatebook);
-
+// 获取书籍列表
+router.get('/back/booklist', booklistApi.getBooklist);
 // 概览页面
 // router.get('/overview', overviewPage.render)
 

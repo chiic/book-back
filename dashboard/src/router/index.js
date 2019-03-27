@@ -34,6 +34,12 @@ export const commonRoutes = [
         component: AddbookComponent
       },
       {
+        path: 'editor/:id',
+        name: 'editor',
+        hidden: true,
+        component: AddbookComponent
+      },
+      {
         path: 'booklist',
         name: 'booklist',
         menuname: '书籍列表',

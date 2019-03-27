@@ -34,7 +34,7 @@
 
 </template>
 <script>
-import addBook from '@/service/addbook.js'
+import addBook from '@/service/bookService.js'
 export default {
   data () {
     return {
@@ -80,6 +80,11 @@ export default {
     },
     resetForm (bookForm) {
       this.$refs[bookForm].resetFields()
+    }
+  },
+  mounted () {
+    if (this.$route && this.$route.params) {
+      console.log(this.$route.params)
     }
   }
 }
