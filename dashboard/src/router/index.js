@@ -5,7 +5,7 @@ import store from '../store'
 const LayoutComponent = () => import('@/components/layout')
 const LoginComponent = () => import('@/components/login')
 const PagenotfoundComponent = () => import('@/components/pagenotfound')
-
+const changepsdComponent = () => import('@/components/changepsd')
 const HomeComponent = () => import('@/components/views/Home')
 const AddbookComponent = () => import('@/components/views/Addbook')
 const BooklistComponent = () => import('@/components/views/Booklist')
@@ -14,6 +14,9 @@ const AuthComponent = () => import('@/components/views/Auth')
 const AuthLayoutComponent = () => import('@/components/views/Auth/layout')
 const AuthAddComponent = () => import('@/components/views/Auth/components/addRole')
 const PluginComponent = () => import('@/components/views/Plugin')
+const verifyComponent = () => import('@/components/changepsd/components/verifyComponent')
+const inputNewComponent = () => import('@/components/changepsd/components/inputnewComponent')
+
 Vue.use(Router)
 
 export const commonRoutes = [
@@ -91,6 +94,26 @@ const router = new Router({
     name: 'login',
     hidden: true,
     component: LoginComponent
+  },
+  {
+    path: '/modify',
+    component: changepsdComponent,
+    children: [{
+      path: '',
+      name: 'modify',
+      component: verifyComponent
+    }, {
+      path: 'input',
+      name: 'input-modify',
+      beforeEnter (to, from, next) {
+        if (store.state.stepNum === 0) {
+          next('/modify')
+        } else {
+          next()
+        }
+      },
+      component: inputNewComponent
+    }]
   },
   {
     path: '/404',

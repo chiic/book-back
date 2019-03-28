@@ -50,7 +50,7 @@
   </div>
 </template>
 <script>
-import { bookList } from '@/service/bookService'
+import { bookList, removebook } from '@/service/bookService'
 import { filterList } from '@/util/filterList'
 export default {
   name: 'booklist',
@@ -63,29 +63,63 @@ export default {
     }
   },
   mounted () {
-    bookList().then(
-      res => {
-        const filterData = filterList(res.data)
-        const keys = Object.keys(filterData)
-        const values = Object.values(filterData)
-        const arr = []
-        for (var i = 0; i < keys.length; i++) {
-          arr.push({
-            key: keys[i],
-            search: '',
-            datas: values[i]
-          })
-        }
-        this.dataSet = arr
-      }
-    )
+    this.initData()
   },
   methods: {
+    initData () {
+      bookList().then(
+        res => {
+          const filterData = filterList(res.data)
+          const keys = Object.keys(filterData)
+          const values = Object.values(filterData)
+          const arr = []
+          for (var i = 0; i < keys.length; i++) {
+            arr.push({
+              key: keys[i],
+              search: '',
+              datas: values[i]
+            })
+          }
+          this.dataSet = arr
+        }
+      )
+    },
+    handlerData (id) {
+      for (var i = 0; i < this.dataSet.length; i++) {
+        let index = -1
+        if (this.dataSet[i].datas && (index = this.dataSet[i].datas.findIndex((n) => n._id === id)) !== -1) {
+          index = this.dataSet[i].datas.findIndex((n) => n._id === id)
+          this.dataSet[i].datas.splice(index, 1)
+          break
+        }
+      }
+    },
     handleEdit (index, row, event) {
       this.$router.push(`/editor/${row._id}`)
     },
     handleDelete (index, row) {
-      console.log(index, row)
+      this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        removebook(row._id).then(
+          res => {
+            if (res.data && res.data.deleting === 'success') {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              })
+              this.handlerData(row._id)
+            }
+          }
+        )
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     toggleCenterHandle () {
       this.clickCenter = !this.clickCenter

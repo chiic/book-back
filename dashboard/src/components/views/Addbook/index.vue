@@ -6,6 +6,7 @@
       :rules="rules"
       label-width="80px"
       :model="formLabelAlign">
+      <img src="/static/img/back.png" class="img-back" @click="returnBooklist">
       <el-form-item label="图片地址" placeholder="图片地址" prop="img">
         <el-input v-model="formLabelAlign.img"></el-input>
       </el-form-item>
@@ -94,6 +95,10 @@ export default {
     },
     resetForm (bookForm) {
       this.$refs[bookForm].resetFields()
+    },
+    returnBooklist () {
+      this.resetForm('bookForm')
+      this.$router.push('/booklist')
     }
   },
   mounted () {
@@ -109,10 +114,20 @@ export default {
 }
 </script>
 <style>
+  .img-back {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+  .img-back:hover {
+    transform: scale(1.2);
+  }
   .add-book-wrapper {
     width: 400px;
     height: 100vh;
     display: flex;
+    position: relative;
     align-items: center;
     margin: 40px auto 0;
   }

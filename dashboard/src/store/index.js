@@ -5,7 +5,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     routesMap: [],
-    userName: ''
+    userName: '',
+    stepNum: 0
   },
   getters: {
     getRoutesmap (state) {
@@ -13,6 +14,9 @@ export default new Vuex.Store({
     },
     userName (state) {
       return state.userName
+    },
+    getStepNum (state) {
+      return state.stepNum
     }
   },
   mutations: {
@@ -21,6 +25,9 @@ export default new Vuex.Store({
     },
     SETUSERNAME (state, data) {
       state.userName = data.username
+    },
+    SETSTEP (state, data) {
+      state.stepNum = data.num
     }
   },
   actions: {
@@ -32,6 +39,12 @@ export default new Vuex.Store({
     },
     dispatchUsername ({commit}, data) {
       commit('SETUSERNAME', data)
+    },
+    dispatchStep ({commit}, data) {
+      return new Promise((resolve, reject) => {
+        commit('SETSTEP', data)
+        resolve()
+      })
     }
   }
 })

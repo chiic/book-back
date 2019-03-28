@@ -37,7 +37,8 @@ export function changeBook (bookdata) {
  * @returns
  */
 export function removebook (id) {
-  return axios.delete('/api/back/removebook', id)
+  console.log(id)
+  return axios.delete('/api/back/removebook', {params: { id }})
 }
 
 /**

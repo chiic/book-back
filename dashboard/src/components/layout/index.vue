@@ -10,6 +10,7 @@
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item icon="el-icon-delete" command="loginout">登出</el-dropdown-item>
+        <el-dropdown-item icon="el-icon-edit-outline" command="modify">修改密码</el-dropdown-item>
       </el-dropdown-menu>
       </el-dropdown>
       <router-view />
@@ -40,6 +41,9 @@ export default {
             }
           }
         )
+      }
+      if (command === 'modify') {
+        this.$router.push({name: 'modify'})
       }
     }
   }

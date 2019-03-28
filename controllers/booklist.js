@@ -13,7 +13,7 @@ exports.addBook = function (req, res) {
 }
 
 exports.removeBook = function (req, res) {
-    models.booklistModel.findById(req.body, function (err, doc) {
+    models.booklistModel.findById(req.query.id, function (err, doc) {
         if (!err) {
             models.booklistModel.deleteOne(doc, function (err) {
                 if (!err) {
