@@ -19,6 +19,8 @@ var upload = multer({storage: storage });
 // 登录api
 router.post('/back/login', userlogin.index);
 router.get('/back/loginout', userlogin.loginOut);
+// 修改密码
+router.post('/back/changepsd', userlogin.changePsd);
 // 权限验证
 router.get('/back/islogin', authToken.index);
 // 添加书籍

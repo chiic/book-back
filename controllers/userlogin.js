@@ -1,21 +1,18 @@
 var models = require('../models');
-exports.index = function(req, res) {
+exports.index = function(req, res, next) {
     var reqUser = req.body.username;
     var reqPsd = req.body.psd;
     models.rolesModel.find({username: reqUser, psd: reqPsd}, function(err, users){
         if(users.length > 0) {
             req.session.username = reqUser;
             req.session.role = users[0].roleName;
+            req.session.uid = users[0]._id
             res.json({login: 'islogin'})
         } else {
             res.status(403);
             res.send({login: 'notlogin'});
         }
     });
-}
-
-exports.render = function(req, res) {
-    res.render('login', {title: '登录页'});
 }
 
 exports.loginOut = function(req, res, next) {
@@ -30,4 +27,17 @@ exports.loginOut = function(req, res, next) {
             });
         }
     })
+}
+
+exports.changePsd = function(req, res, next) {
+    const newpsd = req.body.newpsd;
+    models.rolesModel.update(
+        {_id: req.session.uid},
+        {$set: {psd: newpsd}},
+        function(err, doc) {
+            if(!err) {
+                res.json({update: 'success'})
+            }
+        }
+    )
 }
