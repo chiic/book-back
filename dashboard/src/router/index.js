@@ -16,7 +16,9 @@ const AuthAddComponent = () => import('@/components/views/Auth/components/addRol
 const PluginComponent = () => import('@/components/views/Plugin')
 const verifyComponent = () => import('@/components/changepsd/components/verifyComponent')
 const inputNewComponent = () => import('@/components/changepsd/components/inputnewComponent')
-
+const UserComponent = () => import('@/components/user')
+const UserhomeComponent = () => import('@/components/user/components/home')
+const UsermsgComponent = () => import('@/components/user/components/msg')
 Vue.use(Router)
 
 export const commonRoutes = [
@@ -113,6 +115,19 @@ const router = new Router({
         }
       },
       component: inputNewComponent
+    }]
+  },
+  {
+    path: '/userapplication',
+    component: UserComponent,
+    children: [{
+      path: '',
+      name: 'userapplication',
+      component: UserhomeComponent
+    }, {
+      path: 'msg',
+      name: 'userapplicationmsg',
+      component: UsermsgComponent
     }]
   },
   {

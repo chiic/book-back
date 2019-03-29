@@ -33,3 +33,38 @@ exports.addRole = function(req, res, next) {
         }
     })
 }
+
+exports.uploadUserImg = function(req, res, next) {
+    var img = req.body.data
+    if(req.session.uid) {
+        models.rolesImgModel.findOne({uid: req.session.uid}, function(err, msg) {
+            if(!err) {
+                if(msg) {
+                    models.rolesImgModel.update(msg, {$set: {imgData: img}}, function(e, updateMsg){
+                        if(!e) res.json({message: 'updated', doc: updateMsg})
+                    })
+                } else {
+                    models.rolesImgModel.create(
+                        {uid: req.session.uid, imgData: img},
+                        function(ex, createMsg) {
+                            if(!ex) res.json({message: 'create', doc: createMsg})
+                    })                    
+                }
+            }
+        })
+
+    }
+}
+
+exports.getUserImg = function(req, res, next) {
+    if(req.session.uid) {
+        models.rolesImgModel.findOne({uid: req.session.uid}, function(err, msg) {
+            if(!err && msg) {
+                const { imgData } = msg
+                res.json({imgData, exist: true}) 
+            } else {
+                res.json({exist: false})
+            }
+        })
+    }
+}

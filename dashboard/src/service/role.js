@@ -1,12 +1,20 @@
 import axios from 'axios'
-export var getRoles = function () {
+export const getRoles = function () {
   return axios.get('/role/getroles')
 }
 
-export var addRole = function (config) {
+export const addRole = function (config) {
   return axios.post('/role/addrole', config)
 }
 
-export var changeRole = function (config) {
+export const changeRole = function (config) {
   return axios.put('/role/changerole', config)
+}
+
+export const uploadUserImg = function (data) {
+  return axios.post('/role/uploaduserimg', data)
+}
+
+export const getUserImg = function () {
+  return axios.get('/role/getuserimg')
 }
