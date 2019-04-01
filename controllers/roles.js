@@ -115,6 +115,9 @@ exports.matchRoles = function (req, res, next) {
         image: doc.imgData.replace('data:image/jpeg;base64,', ''),
         image_type: 'BASE64'
       }]).then(function (result) {
+        if(result.error_msg && result.error_msg === 'SUCCESS' && result.result.score > 85) {
+          req.session.crossfaceAuth = 'crossAuth'
+        }
         res.json(result);
       });
     });

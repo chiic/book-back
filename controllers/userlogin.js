@@ -7,10 +7,13 @@ exports.index = function(req, res, next) {
             req.session.username = reqUser;
             req.session.role = users[0].roleName;
             req.session.uid = users[0]._id
-            res.json({login: 'islogin', faceAuth: users[0].faceAuth})
+            if (users[0].faceAuth) {
+                req.session.crossfaceAuth = 'notCrossAuth'
+            }
+            res.json({login: 'passpsd', faceAuth: users[0].faceAuth})
         } else {
             res.status(403);
-            res.send({login: 'notlogin'});
+            res.send({login: 'notpass'});
         }
     });
 }

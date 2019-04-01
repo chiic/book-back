@@ -22,9 +22,12 @@
       title="提示"
       :visible.sync="dialogVisible"
       width="30%"
+      @closed="closeBefore"
       @opened="getMedia"
       height="300px">
-      <video src="" width="100%" height="100%" ref="camera-video-login"></video>
+      <div class="dialog-video-wp">
+        <video src="" width="100%" height="100%" ref="camera-video-login"></video>
+      </div>
       <canvas ref="camera-canvas-login" width="300px" height="300px" class="login-cemera-canvas"></canvas>
     </el-dialog>
   </div>
@@ -47,16 +50,20 @@ export default {
       canvas: null,
       ctx: null,
       mediaStreamTrack: null,
-      ismatch: false
+      ismatch: false,
+      timer: null
     }
   },
   methods: {
+    closeBefore () {
+      clearInterval(this.timer)
+    },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$http.post('/api/back/login', this.Form)
             .then(res => {
-              if (res.data && res.data.login === 'islogin') {
+              if (res.data && res.data.login === 'passpsd') {
                 if (res.data.faceAuth) {
                   this.showCamera()
                 } else {
@@ -93,9 +100,7 @@ export default {
         _this.mediaStreamTrack = MediaStream
         video.srcObject = MediaStream
         video.play()
-        setTimeout(() => {
-          this.matchImg()
-        }, 3000)
+        this.matchImg()
       })
     },
     takePhotoData () {
@@ -107,22 +112,24 @@ export default {
       return this.canvas.toDataURL('image/jpeg')
     },
     matchImg () {
-      matchRoles({img: this.takePhotoData()}).then(res => {
-        if (res.data) {
-          if (res.data.result.score > 85) {
+      this.timer = setInterval(() => {
+        matchRoles({img: this.takePhotoData()}).then(res => {
+          if (res.data.result && res.data.result.score > 85) {
+            clearInterval(this.timer)
             this.$router.push('/')
-          } else {
-            this.matchImg()
           }
-        }
-      })
+        })
+      }, 1000)
+    },
+    destroyedCamera () {
+      this.mediaStreamTrack.getTracks()
+        .forEach(function (track) {
+          track.stop()
+        })
     }
   },
   destroyed () {
-    this.mediaStreamTrack.getTracks()
-      .forEach(function (track) {
-        track.stop()
-      })
+    this.destroyedCamera()
   }
 }
 </script>
@@ -173,5 +180,8 @@ input:-webkit-autofill:active {
 }
 .login-cemera-canvas {
   display: none;
+}
+.dialog-video-wp {
+  position: relative;
 }
 </style>
