@@ -18,7 +18,6 @@
         <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
       </el-form-item>
     </el-form>
-    <el-button @click="showCamera">书</el-button>
     <el-dialog
       title="提示"
       :visible.sync="dialogVisible"
@@ -57,8 +56,12 @@ export default {
         if (valid) {
           this.$http.post('/api/back/login', this.Form)
             .then(res => {
-              if (res.data.login === 'islogin') {
-                this.$router.push('/')
+              if (res.data && res.data.login === 'islogin') {
+                if (res.data.faceAuth) {
+                  this.showCamera()
+                } else {
+                  this.$router.push('/')
+                }
               }
             })
             .catch(err => {
@@ -84,20 +87,15 @@ export default {
         video: { width: 300, height: 300 },
         audio: false
       }
-      // 获得video摄像头区域
       let video = _this.$refs['camera-video-login']
-
-      // 这里介绍新的方法，返回一个 Promise对象
-      // 这个Promise对象返回成功后的回调函数带一个 MediaStream 对象作为其参数
-      // then()是Promise对象里的方法
-      // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
-      // 避免数据没有获取到
       let promise = navigator.mediaDevices.getUserMedia(constraints)
       promise.then(MediaStream => {
         _this.mediaStreamTrack = MediaStream
         video.srcObject = MediaStream
         video.play()
-        this.matchImg()
+        setTimeout(() => {
+          this.matchImg()
+        }, 3000)
       })
     },
     takePhotoData () {
@@ -110,13 +108,21 @@ export default {
     },
     matchImg () {
       matchRoles({img: this.takePhotoData()}).then(res => {
-        if (res.data && res.data.score > 85) {
-          this.$router.push('/')
-        } else {
-          this.matchImg()
+        if (res.data) {
+          if (res.data.result.score > 85) {
+            this.$router.push('/')
+          } else {
+            this.matchImg()
+          }
         }
       })
     }
+  },
+  destroyed () {
+    this.mediaStreamTrack.getTracks()
+      .forEach(function (track) {
+        track.stop()
+      })
   }
 }
 </script>

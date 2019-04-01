@@ -22,3 +22,11 @@ export const getUserImg = function () {
 export const matchRoles = function (data) {
   return axios.post('/role/matchroles', data)
 }
+
+export const changeFaceauth = function (value) {
+  return axios.post('/role/changeface', value)
+}
+
+export const getUserface = function () {
+  return axios.get('/role/getface')
+}

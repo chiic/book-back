@@ -18,4 +18,10 @@ router.get('/getuserimg', roles.getUserImg);
 
 // 刷脸识别
 router.post('/matchroles', roles.matchRoles);
+
+// 修改刷脸认证
+router.post('/changeface', roles.changeFace);
+
+// 获取刷脸认证
+router.get('/getface', roles.getFace);
 module.exports = router;

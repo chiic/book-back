@@ -1,5 +1,7 @@
 var models = require('../models/index');
 var AipFaceClient = require("baidu-aip-sdk").face;
+var fs = require('fs');
+var path = require('path');
 var APP_ID = "15901519";
 var API_KEY = "EnAkLSgGoCOwVhgVwnC3NGqO";
 var SECRET_KEY = "kjVoMaYLMMFxPshlXAAWWiXxB13GVVyz";
@@ -30,6 +32,7 @@ exports.changeRole = function (req, res, next) {
 
 exports.addRole = function (req, res, next) {
   var data = req.body;
+  data.faceAuth = false;
   models.rolesModel.create(data, function (err, roles) {
     if (!err) {
       res.status(200);
@@ -100,21 +103,41 @@ exports.getUserImg = function (req, res, next) {
 
 exports.matchRoles = function (req, res, next) {
   const loginImg = req.body.img
-  console.log(loginImg)
-  if (!loginImg) {
+  if (loginImg) {
     var client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY);
-    models.rolesImgModel.find((err, doc) => {
-      doc.forEach(element => {
-        client.match([{
-          image: loginImg,
-          image_type: 'BASE64'
-        }, {
-          image: doc.imgData,
-          image_type: 'BASE64'
-        }]).then(function (result) {
-          console.log('<match>: ' + JSON.stringify(result));
-        });
-      });  
+    models.rolesImgModel.findOne({
+      uid: req.session.uid
+    }, (err, doc) => {
+      client.match([{
+        image: loginImg.replace('data:image/jpeg;base64,', ''),
+        image_type: 'BASE64'
+      }, {
+        image: doc.imgData.replace('data:image/jpeg;base64,', ''),
+        image_type: 'BASE64'
+      }]).then(function (result) {
+        res.json(result);
+      });
     });
   }
+}
+
+exports.changeFace = function (req, res, next) {
+  models.rolesModel.update({
+      _id: req.session.uid
+    }, {
+      $set: {
+        faceAuth: req.body.value
+      }
+    },
+    (err, doc) => {
+      if (!err) {
+        res.json({ischanged: true})
+      }
+    })
+}
+
+exports.getFace = function(req, res, next) {
+  models.rolesModel.findOne({_id: req.session.uid}, (err, doc) => {
+    if(!err) res.json({faceAuth: doc.faceAuth})
+  })
 }

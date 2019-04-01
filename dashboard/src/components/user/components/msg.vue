@@ -85,7 +85,6 @@ export default {
     this.getMedia()
   },
   destroyed () {
-    console.log(this.mediaStreamTrack)
     this.mediaStreamTrack.getTracks()
       .forEach(function (track) {
         track.stop()

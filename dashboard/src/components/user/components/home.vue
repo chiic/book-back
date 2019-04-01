@@ -30,6 +30,7 @@
           <el-switch
             v-model="cameraValue"
             active-color="#13ce66"
+            @change="switchValue"
             inactive-color="#ff4949">
           </el-switch>
         </li>
@@ -38,7 +39,7 @@
   </el-row>
 </template>
 <script>
-import { getUserImg } from '@/service/role'
+import { getUserImg, changeFaceauth, getUserface } from '@/service/role'
 export default {
   name: 'user-home',
   data () {
@@ -54,6 +55,15 @@ export default {
     },
     cameraHandler () {
       this.$router.push('/userapplication/msg')
+    },
+    switchValue (value) {
+      changeFaceauth({value}).then(
+        res => {
+          if (res.data && res.data.ischanged) {
+            this.$message(value ? '开启成功' : '关闭成功')
+          }
+        }
+      )
     }
   },
   mounted () {
@@ -61,6 +71,13 @@ export default {
       res => {
         if (res.data && res.data.imgData) {
           this.imgData = res.data.imgData
+        }
+      }
+    )
+    getUserface().then(
+      res => {
+        if (res.data && res.data.faceAuth) {
+          this.cameraValue = res.data.faceAuth
         }
       }
     )
