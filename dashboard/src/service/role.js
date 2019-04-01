@@ -18,3 +18,7 @@ export const uploadUserImg = function (data) {
 export const getUserImg = function () {
   return axios.get('/role/getuserimg')
 }
+
+export const matchRoles = function (data) {
+  return axios.post('/role/matchroles', data)
+}

@@ -15,4 +15,7 @@ router.post('/addrole', roles.addRole);
 router.post('/uploaduserimg', roles.uploadUserImg);
 
 router.get('/getuserimg', roles.getUserImg);
+
+// 刷脸识别
+router.post('/matchroles', roles.matchRoles);
 module.exports = router;
