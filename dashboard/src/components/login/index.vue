@@ -21,12 +21,13 @@
     <el-dialog
       title="提示"
       :visible.sync="dialogVisible"
-      width="30%"
+      width="240px"
       @closed="closeBefore"
       @opened="getMedia"
-      height="300px">
+      height="200px">
       <div class="dialog-video-wp">
-        <video src="" width="100%" height="100%" ref="camera-video-login"></video>
+        <video src="" width="200px" height="200px" ref="camera-video-login"></video>
+        <div class="line"></div>
       </div>
       <canvas ref="camera-canvas-login" width="300px" height="300px" class="login-cemera-canvas"></canvas>
     </el-dialog>
@@ -183,5 +184,34 @@ input:-webkit-autofill:active {
 }
 .dialog-video-wp {
   position: relative;
+  border-radius: 5px;
+  border: 1px solid #00ebfb;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+@keyframes diglogLIne {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 95%;
+  }
+  100% {
+    top: 0;
+  }
+}
+.dialog-video-wp .line {
+  width: 90%;
+  margin-left: 5%;
+  height: 5px;
+  background: #00ebfb;
+  animation: diglogLIne 3s infinite;
+  position: absolute;
+}
+.lg-wrapper .el-dialog {
+  background: #111731;
+}
+.dialog-video-wp video {
+  margin-bottom: -4px;
 }
 </style>
