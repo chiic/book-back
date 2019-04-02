@@ -9,7 +9,10 @@
 * node app.js
 #### 概览
 * 登录页,刷脸登录验证
-![imgage](./)
+![imgage](https://github.com/chiic/book-back/blob/master/overimgs/login.png)
 * 首页
+![imgage](https://github.com/chiic/book-back/blob/master/overimgs/home.png)
 * 支持上传添加数据
+![imgage](https://github.com/chiic/book-back/blob/master/overimgs/upload.png)
 * 用户中心开启刷脸验证
+![imgage](https://github.com/chiic/book-back/blob/master/overimgs/user.png)
