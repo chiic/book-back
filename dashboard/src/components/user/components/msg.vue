@@ -42,16 +42,27 @@ export default {
       }
       // 获得video摄像头区域
       let video = this.$refs['camera-video']
-      // 这里介绍新的方法，返回一个 Promise对象
       // 这个Promise对象返回成功后的回调函数带一个 MediaStream 对象作为其参数
       // then()是Promise对象里的方法
       // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
       // 避免数据没有获取到
-      let promise = navigator.mediaDevices.getUserMedia(constraints)
-      promise.then(MediaStream => {
+      // 由于chrome必须在https协议下才能使用，所以切换为旧版本API,如果当前使用的网站为https,建议使用最新版API
+      // let promise = navigator.mediaDevices.getUserMedia(constraints)
+      // promise.then(MediaStream => {
+      //   this.mediaStreamTrack = MediaStream
+      //   video.srcObject = MediaStream
+      //   video.play()
+      // })
+      navigator.getMedia = navigator.getUserMedia ||
+                      navigator.webkitGetUserMedia ||
+                      navigator.mozGetUserMedia ||
+                      navigator.msGetUserMedia
+      navigator.getMedia(constraints, (MediaStream) => {
         this.mediaStreamTrack = MediaStream
         video.srcObject = MediaStream
         video.play()
+      }, (err) => {
+        console.log(err)
       })
     },
     takePhoto () {
