@@ -47,23 +47,23 @@ export default {
       // then()方法是异步执行，当then()前的方法执行完后再执行then()内部的程序
       // 避免数据没有获取到
       // 由于chrome必须在https协议下才能使用，所以切换为旧版本API,如果当前使用的网站为https,建议使用最新版API
-      // let promise = navigator.mediaDevices.getUserMedia(constraints)
-      // promise.then(MediaStream => {
-      //   this.mediaStreamTrack = MediaStream
-      //   video.srcObject = MediaStream
-      //   video.play()
-      // })
-      navigator.getMedia = navigator.getUserMedia ||
-                      navigator.webkitGetUserMedia ||
-                      navigator.mozGetUserMedia ||
-                      navigator.msGetUserMedia
-      navigator.getMedia(constraints, (MediaStream) => {
+      let promise = navigator.mediaDevices.getUserMedia(constraints)
+      promise.then(MediaStream => {
         this.mediaStreamTrack = MediaStream
         video.srcObject = MediaStream
         video.play()
-      }, (err) => {
-        console.log(err)
       })
+      // navigator.getMedia = navigator.getUserMedia ||
+      //                 navigator.webkitGetUserMedia ||
+      //                 navigator.mozGetUserMedia ||
+      //                 navigator.msGetUserMedia
+      // navigator.getMedia(constraints, (MediaStream) => {
+      //   this.mediaStreamTrack = MediaStream
+      //   video.srcObject = MediaStream
+      //   video.play()
+      // }, (err) => {
+      //   console.log(err)
+      // })
     },
     takePhoto () {
       // 获得Canvas对象

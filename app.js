@@ -1,4 +1,6 @@
 var path = require('path');
+var https = require('https');
+var fs = require('fs');
 var config = require('./config');
 var logger = require('./common/logger');
 var request_log = require('./middlewares/request_log');
@@ -29,6 +31,12 @@ app.use(session({
     maxAge: 60 * 60 * 1000
   }
 }))
+
+// 密钥和签名证书
+var options = {
+  key: fs.readFileSync('./keys/server.key'),
+  cert: fs.readFileSync('./keys/server.crt')
+}
 // app.use(csrf({ cookie: true }));
 // 请求日志
 // app.use(request_log);
@@ -57,7 +65,10 @@ app.use('/role', roleRender);
 // 使用node代理vue spa页面
 app.use(express.static('./public'))
 
-app.listen(config.port, config.hostname, function(err) {
+// 开启https
+var httpsServer = https.createServer(options, app);
+
+httpsServer.listen(config.port, config.hostname, function(err) {
   if(!err) {
     logger.info('监听端口为:', config.port);
     logger.info('主机为:', config.hostname);

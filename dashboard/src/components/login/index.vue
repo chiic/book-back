@@ -96,25 +96,25 @@ export default {
         audio: false
       }
       let video = _this.$refs['camera-video-login']
-      // let promise = navigator.mediaDevices.getUserMedia(constraints)
-      // promise.then(MediaStream => {
-      //   _this.mediaStreamTrack = MediaStream
-      //   video.srcObject = MediaStream
-      //   video.play()
-      //   this.matchImg()
-      // })
-      navigator.getMedia = navigator.getUserMedia ||
-                navigator.webkitGetUserMedia ||
-                navigator.mozGetUserMedia ||
-                navigator.msGetUserMedia
-      navigator.getMedia(constraints, (MediaStream) => {
-        this.mediaStreamTrack = MediaStream
+      let promise = navigator.mediaDevices.getUserMedia(constraints)
+      promise.then(MediaStream => {
+        _this.mediaStreamTrack = MediaStream
         video.srcObject = MediaStream
         video.play()
         this.matchImg()
-      }, (err) => {
-        console.log(err)
       })
+      // navigator.getMedia = navigator.getUserMedia ||
+      //           navigator.webkitGetUserMedia ||
+      //           navigator.mozGetUserMedia ||
+      //           navigator.msGetUserMedia
+      // navigator.getMedia(constraints, (MediaStream) => {
+      //   this.mediaStreamTrack = MediaStream
+      //   video.srcObject = MediaStream
+      //   video.play()
+      //   this.matchImg()
+      // }, (err) => {
+      //   console.log(err)
+      // })
     },
     takePhotoData () {
       // 获得Canvas对象
