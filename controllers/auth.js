@@ -5,7 +5,6 @@ exports.index = function (req, res, next) {
       islogin: false
     });
   } else {
-    console.log(req.session)
     if (req.session.crossfaceAuth === 'notCrossAuth') {
       res.json({
         islogin: false

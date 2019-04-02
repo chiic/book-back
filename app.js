@@ -26,7 +26,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 60 * 20 * 1000
+    maxAge: 60 * 60 * 1000
   }
 }))
 // app.use(csrf({ cookie: true }));
@@ -45,8 +45,6 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
 app.locals._layoutFile = 'layout.html';
 
-
-
 // api接口
 app.use('/api', indexRender);
 
@@ -57,7 +55,7 @@ app.use('/os', osRender);
 app.use('/role', roleRender);
 
 // 使用node代理vue spa页面
-app.use('/', express.static('./public'))
+app.use(express.static('./public'))
 
 app.listen(config.port, config.hostname, function(err) {
   if(!err) {

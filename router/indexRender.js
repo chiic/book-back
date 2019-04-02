@@ -35,7 +35,5 @@ router.get('/back/booklist', booklistApi.getBooklist);
 router.get('/back/getbook', booklistApi.getbook);
 // 上传接口
 router.post('/upload', upload.single('file'), uploadControl.upload)
-// 概览页面
-// router.get('/overview', overviewPage.render)
 
 module.exports = router;
