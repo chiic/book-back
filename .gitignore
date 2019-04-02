@@ -3,3 +3,5 @@ node_modules/
 log_dir/
 
 *.log
+
+access_token.json

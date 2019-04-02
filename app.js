@@ -66,9 +66,9 @@ app.use('/role', roleRender);
 app.use(express.static('./public'))
 
 // 开启https
-var httpsServer = https.createServer(options, app);
+// var httpsServer = https.createServer(options, app);
 
-httpsServer.listen(config.port, config.hostname, function(err) {
+app.listen(config.port, config.hostname, function(err) {
   if(!err) {
     logger.info('监听端口为:', config.port);
     logger.info('主机为:', config.hostname);
