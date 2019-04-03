@@ -17,4 +17,4 @@
 
 <img src="https://github.com/chiic/book-back/blob/master/overimgs/login.png" width="40%" height="40%"/>&ensp;&ensp;<img src="https://github.com/chiic/book-back/blob/master/overimgs/home.png" width="40%" height="40%"/>&ensp;&ensp;<img src="https://github.com/chiic/book-back/blob/master/overimgs/user.png" width="40%" height="40%"/>&ensp;&ensp;<img src="https://github.com/chiic/book-back/blob/master/overimgs/psd.png" width="40%" height="40%"/>
 
-[说明文档](https://github.com/chiic/book-back/edit/master/DETAIL.md)
+[说明文档](https://github.com/chiic/book-back/blob/master/DETAIL.md)
