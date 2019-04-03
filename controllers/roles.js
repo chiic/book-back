@@ -144,3 +144,7 @@ exports.getFace = function(req, res, next) {
     if(!err) res.json({faceAuth: doc.faceAuth})
   })
 }
+
+exports.register = function(req, res, next) {}
+
+exports.regValidate = function(req, res, next) {}

@@ -11,7 +11,7 @@
       </el-form-item>
       <el-form-item prop="psd">
         <embed class="icon-input user" src="/static/img/password.svg" />
-        <el-input v-model="Form.psd" type="password"></el-input>
+        <el-input v-model="Form.psd" autocomplete="new-password" type="password" show-password></el-input>
       </el-form-item>
       <el-form-item class="form-btn-el">
         <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>

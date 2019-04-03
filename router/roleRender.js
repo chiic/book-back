@@ -24,4 +24,11 @@ router.post('/changeface', roles.changeFace);
 
 // 获取刷脸认证
 router.get('/getface', roles.getFace);
+
+// 用户注册
+router.post('/register', roles.register);
+
+// 用户注册邮箱验证
+router.post('/reg_validate', roles.regValidate);
+
 module.exports = router;

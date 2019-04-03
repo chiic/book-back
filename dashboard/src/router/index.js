@@ -19,6 +19,7 @@ const inputNewComponent = () => import('@/components/changepsd/components/inputn
 const UserComponent = () => import('@/components/user')
 const UserhomeComponent = () => import('@/components/user/components/home')
 const UsermsgComponent = () => import('@/components/user/components/msg')
+const RegisterComponent = () => import('@/components/register')
 Vue.use(Router)
 // 路由白名单
 const whiteMenu = ['/forgetpsd', '/register']
@@ -130,6 +131,11 @@ const router = new Router({
       name: 'userapplicationmsg',
       component: UsermsgComponent
     }]
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: RegisterComponent
   },
   {
     path: '/404',
