@@ -1,5 +1,11 @@
 <template>
-  <div style="width:100%;height: 100vh;background: #7d7e88;">
+  <div style="width:100%;height: 100vh;">
+    <div class="change-title-wp">
+      <div class="title-change">
+        <img src="/static/img/lock.png" alt="">
+        <span style="font-size: 12px;color: #ffffff;">密码中心</span>
+      </div>
+    </div>
     <div class="modify-wrapper">
       <el-steps :active="getStepNum" finish-status="success" align-center>
         <el-step title="人机验证"></el-step>
@@ -30,12 +36,26 @@ export default {
 </script>
 <style>
   .modify-wrapper {
-    width: 600px;
-    height: 100vh;
+    width: 1000px;
     margin: 0 auto;
-    padding: 100px 0;
+    background: #f9f9f9;
+    margin-top: 60px;
+    padding: 20px 50px;
   }
-  .modify-wrapper .el-form-item__label {
+  /* .modify-wrapper .el-form-item__label {
     color: #ffffff;
+  } */
+  .change-title-wp {
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
+    background: #363636;
+  }
+  .change-title-wp .title-change {
+    width: 1000px;
+    margin: auto;
+  }
+  .change-title-wp .title-change img {
+    vertical-align: middle;
   }
 </style>

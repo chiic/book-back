@@ -72,7 +72,7 @@ export default {
   }
   .user-wrapper-application .title-wrapper {
     width: 100%;
-    background: #107bf8;
+    background: #363636;
   }
   .user-wrapper-application .title-user {
     width: 1000px;

@@ -87,8 +87,10 @@ export default {
 <style>
   .content-wrapper {
     width: 1000px;
-    padding-top: 50px;
-    margin: auto;
+    padding: 50px 0;
+    border: 1px solid #e6e6e6;
+    background: #f9f9f9;
+    margin: 50px auto;
   }
   .content-wrapper .item-content {
     height: 350px;

@@ -20,7 +20,8 @@ const UserComponent = () => import('@/components/user')
 const UserhomeComponent = () => import('@/components/user/components/home')
 const UsermsgComponent = () => import('@/components/user/components/msg')
 Vue.use(Router)
-
+// 路由白名单
+const whiteMenu = ['/forgetpsd', '/register']
 export const commonRoutes = [
   {
     path: '/',
@@ -140,41 +141,45 @@ const router = new Router({
 
 let pushFlag = false
 router.beforeEach((to, from, next) => {
-  auth().then(
-    res => {
-      if (res.data && res.data.islogin) {
-        if (to.path === '/login') {
-          next('/')
-        } else {
-          store.dispatch('dispatchUsername', {username: res.data.username})
-          if (!pushFlag && res.data.role === 'admin') {
-            commonRoutes[0].children.push(asyncRoutes[0])
-            store.dispatch('dispatchRoutes', commonRoutes)
-              .then(res => {
-                router.addRoutes([...commonRoutes, ...pageNotRoute])
-                pushFlag = true
-                next({...to, replace: true})
-              })
-          } else if (!pushFlag && res.data.role === 'user') {
-            store.dispatch('dispatchRoutes', commonRoutes)
-              .then(res => {
-                router.addRoutes([...commonRoutes, ...pageNotRoute])
-                pushFlag = true
-                next({...to, replace: true})
-              })
+  if (whiteMenu.indexOf(to.path) !== -1) {
+    next()
+  } else {
+    auth().then(
+      res => {
+        if (res.data && res.data.islogin) {
+          if (to.path === '/login') {
+            next('/')
           } else {
+            store.dispatch('dispatchUsername', {username: res.data.username})
+            if (!pushFlag && res.data.role === 'admin') {
+              commonRoutes[0].children.push(asyncRoutes[0])
+              store.dispatch('dispatchRoutes', commonRoutes)
+                .then(res => {
+                  router.addRoutes([...commonRoutes, ...pageNotRoute])
+                  pushFlag = true
+                  next({...to, replace: true})
+                })
+            } else if (!pushFlag && res.data.role === 'user') {
+              store.dispatch('dispatchRoutes', commonRoutes)
+                .then(res => {
+                  router.addRoutes([...commonRoutes, ...pageNotRoute])
+                  pushFlag = true
+                  next({...to, replace: true})
+                })
+            } else {
+              next()
+            }
+          }
+        } else {
+          if (to.path === '/login') {
             next()
+          } else {
+            next('/login')
           }
         }
-      } else {
-        if (to.path === '/login') {
-          next()
-        } else {
-          next('/login')
-        }
       }
-    }
-  )
+    )
+  }
 })
 
 export default router

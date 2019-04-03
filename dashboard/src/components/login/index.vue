@@ -4,8 +4,7 @@
       :model="Form"
       :rules="rules"
       ref="ruleForm"
-      class="demo-ruleForm"
-    >
+      class="demo-ruleForm">
       <el-form-item prop="username">
         <embed class="icon-input user" src="/static/img/user.svg" />
         <el-input v-model="Form.username"></el-input>
@@ -17,6 +16,10 @@
       <el-form-item class="form-btn-el">
         <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
       </el-form-item>
+      <ul class="item-wp-user">
+        <li><router-link to="/register">注册账号</router-link></li>
+        <li><router-link to="/forgetpsd">忘记密码</router-link></li>
+      </ul>
     </el-form>
     <el-dialog
       title="提示"
@@ -103,18 +106,6 @@ export default {
         video.play()
         this.matchImg()
       })
-      // navigator.getMedia = navigator.getUserMedia ||
-      //           navigator.webkitGetUserMedia ||
-      //           navigator.mozGetUserMedia ||
-      //           navigator.msGetUserMedia
-      // navigator.getMedia(constraints, (MediaStream) => {
-      //   this.mediaStreamTrack = MediaStream
-      //   video.srcObject = MediaStream
-      //   video.play()
-      //   this.matchImg()
-      // }, (err) => {
-      //   console.log(err)
-      // })
     },
     takePhotoData () {
       // 获得Canvas对象
@@ -135,10 +126,12 @@ export default {
       }, 1000)
     },
     destroyedCamera () {
-      this.mediaStreamTrack.getTracks()
-        .forEach(function (track) {
-          track.stop()
-        })
+      if (this.mediaStreamTrack) {
+        this.mediaStreamTrack.getTracks()
+          .forEach(function (track) {
+            track.stop()
+          })
+      }
     }
   },
   destroyed () {
@@ -225,5 +218,16 @@ input:-webkit-autofill:active {
 }
 .dialog-video-wp video {
   margin-bottom: -4px;
+}
+.item-wp-user {
+  display: flex;
+}
+.item-wp-user li {
+  list-style: none;
+}
+.item-wp-user li a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 10px;
 }
 </style>

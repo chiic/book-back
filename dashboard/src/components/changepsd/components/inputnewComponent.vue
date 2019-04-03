@@ -1,5 +1,5 @@
 <template>
-  <el-form ref="form_new_psd" :model="form" label-width="100px" :rules="rules">
+  <el-form ref="form_new_psd" :model="form" label-width="100px" :rules="rules" class="change-form-wp">
     <el-form-item label="用户名">
       <div class="login-name">{{useraname}}</div>
     </el-form-item>
@@ -88,7 +88,9 @@ export default {
 </script>
 <style>
   .login-name {
-    color: #ffffff;
     font-size: 16px;
+  }
+  .change-form-wp {
+    width: 50%;
   }
 </style>
