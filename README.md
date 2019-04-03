@@ -9,12 +9,20 @@
 * node app.js
 #### 概览
 * 登录页,刷脸登录验证
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/login.png) 
 * 首页
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/home.png)
 * 支持上传添加数据
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/upload.png)
 * 用户中心开启刷脸验证
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/user.png)
 * 修改密码
+<img src="https://github.com/chiic/book-back/blob/master/overimgs/login.png" width="30%" height="30%"/>
+<img src="https://github.com/chiic/book-back/blob/master/overimgs/home.png" width="30%" height="30%"/>
+<img src="https://github.com/chiic/book-back/blob/master/overimgs/upload.png" width="30%" height="30%"/>
+<img src="https://github.com/chiic/book-back/blob/master/overimgs/user.png" width="30%" height="30%"/>
+<img src="https://github.com/chiic/book-back/blob/master/overimgs/psd.png" width="30%" height="30%"/>
+![imgage](https://github.com/chiic/book-back/blob/master/overimgs/login.png) 
+
+![imgage](https://github.com/chiic/book-back/blob/master/overimgs/home.png)
+
+![imgage](https://github.com/chiic/book-back/blob/master/overimgs/upload.png)
+![imgage](https://github.com/chiic/book-back/blob/master/overimgs/user.png)
+
 ![imgage](https://github.com/chiic/book-back/blob/master/overimgs/psd.png)
