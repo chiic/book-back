@@ -30,3 +30,7 @@ export const changeFaceauth = function (value) {
 export const getUserface = function () {
   return axios.get('/role/getface')
 }
+
+export const register = function (config) {
+  return axios.post('/role/register', config)
+}

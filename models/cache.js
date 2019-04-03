@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
  * activeCode => 为激活码，通过md5生成
  */ 
 var cacheSchema = new Schema({
-    createTime: Date,
+    createTime: {type: Date, index: {expires: 60*30}},
     username: String,
     psd: String,
     state: Number,

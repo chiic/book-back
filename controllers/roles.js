@@ -1,10 +1,13 @@
 var models = require('../models/index');
 var AipFaceClient = require("baidu-aip-sdk").face;
-var fs = require('fs');
-var path = require('path');
+var nodemailer = require('nodemailer');
+var random = require('string-random');
+var aes = require('../utils/sign_crypto');
+// 利用生成cookie的库来生成密文字符串
 var APP_ID = "15901519";
 var API_KEY = "EnAkLSgGoCOwVhgVwnC3NGqO";
 var SECRET_KEY = "kjVoMaYLMMFxPshlXAAWWiXxB13GVVyz";
+
 exports.getRoles = function (req, res, next) {
   models.rolesModel.find(function (err, roles) {
     if (!err) {
@@ -115,7 +118,7 @@ exports.matchRoles = function (req, res, next) {
         image: doc.imgData.replace('data:image/jpeg;base64,', ''),
         image_type: 'BASE64'
       }]).then(function (result) {
-        if(result.error_msg && result.error_msg === 'SUCCESS' && result.result.score > 85) {
+        if (result.error_msg && result.error_msg === 'SUCCESS' && result.result.score > 85) {
           req.session.crossfaceAuth = 'crossAuth'
         }
         res.json(result);
@@ -134,17 +137,73 @@ exports.changeFace = function (req, res, next) {
     },
     (err, doc) => {
       if (!err) {
-        res.json({ischanged: true})
+        res.json({
+          ischanged: true
+        })
       }
     })
 }
 
-exports.getFace = function(req, res, next) {
-  models.rolesModel.findOne({_id: req.session.uid}, (err, doc) => {
-    if(!err) res.json({faceAuth: doc.faceAuth})
+exports.getFace = function (req, res, next) {
+  models.rolesModel.findOne({
+    _id: req.session.uid
+  }, (err, doc) => {
+    if (!err) res.json({
+      faceAuth: doc.faceAuth
+    })
   })
 }
 
-exports.register = function(req, res, next) {}
+function sendMail(to, url) {
+  var nodemailer = require('nodemailer');
+  var transporter = nodemailer.createTransport({
+    //https://github.com/andris9/nodemailer-wellknown#supported-services 支持列表
+    service: 'qq',
+    port: 465, // SMTP 端口
+    secureConnection: true, // 使用 SSL
+    auth: {
+      user: '442747096@qq.com',
+      //这里密码不是qq密码，是你设置的smtp密码
+      pass: 'wnxlmltddlhmcbdb'
+    }
+  });
 
-exports.regValidate = function(req, res, next) {}
+  // NB! No need to recreate the transporter object. You can use
+  // the same transporter object for all e-mails
+
+  // setup e-mail data with unicode symbols
+  var mailOptions = {
+    from: '442747096@qq.com', // 发件地址
+    to: to, // 收件列表
+    subject: 'register', // 标题
+    //text和html两者只支持一种
+  html: `这是激活链接，${url}<b>Hello world ?</b>请在30分钟内激活` // html 内容
+  };
+
+  // send mail with defined transport object
+  return transporter.sendMail(mailOptions);
+}
+
+exports.register = function (req, res, next) {
+  if (req.body) {
+    const randomStr = random(16)
+    const data = {
+      ...req.body,
+      state: 0,
+      activeCode: randomStr,
+      createTime: new Date()
+    }
+    models.cacheModel.create(data, function (err, doc) {
+      if (!err) {
+        const aesData = aes.aesEncrypt('username=' + req.body.username + 'activeCode=' + randomStr)
+        const url = `http://localhost:3001/role/register?${aesData}`
+        console.log(url)
+        sendMail(req.body.email, url).then(
+          res => console.log(res)
+        )
+      }
+    })
+  }
+}
+
+exports.regValidate = function (req, res, next) {}

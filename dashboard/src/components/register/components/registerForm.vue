@@ -26,6 +26,7 @@
   </el-form>
 </template>
 <script>
+import { register } from '@/service/role'
 export default {
   data () {
     var validatePass = (rule, value, callback) => {
@@ -69,7 +70,10 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // const { username, psd, email } = this.ruleForm
+          const { username, psd, email } = this.ruleForm
+          register({username, psd, email}).then(
+            res => console.log(res)
+          )
         } else {
           return false
         }

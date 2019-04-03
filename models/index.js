@@ -11,4 +11,4 @@ exports.booklistModel = new Model('Booklist', booklistSchema);
 exports.userModel = new Model('User', userSchema);
 exports.rolesModel = new Model('Roles', rolesSchema);
 exports.rolesImgModel = new Model('RolesImg', rolesImgSchema);
-exports.cacheSchema = new Model('cacheRegister', cacheSchema)
+exports.cacheModel = new Model('cacheRegister', cacheSchema)

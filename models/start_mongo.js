@@ -6,7 +6,4 @@ var db = mongoose.connection;
 db.on('error',console.error.bind(console,'连接错误:'));
 db.once('open', function (callback) {
   console.log("数据库成功连接");
-  models.cacheSchema.createIndexes({expireAfterSeconds: 20*60}, () => {
-    console.log('邮箱注册集合，索引设置成功')
-  })
 });
