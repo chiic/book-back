@@ -13,16 +13,4 @@
 * 支持上传添加数据
 * 用户中心开启刷脸验证
 * 修改密码
-<img src="https://github.com/chiic/book-back/blob/master/overimgs/login.png" width="30%" height="30%"/>
-<img src="https://github.com/chiic/book-back/blob/master/overimgs/home.png" width="30%" height="30%"/>
-<img src="https://github.com/chiic/book-back/blob/master/overimgs/upload.png" width="30%" height="30%"/>
-<img src="https://github.com/chiic/book-back/blob/master/overimgs/user.png" width="30%" height="30%"/>
-<img src="https://github.com/chiic/book-back/blob/master/overimgs/psd.png" width="30%" height="30%"/>
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/login.png) 
-
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/home.png)
-
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/upload.png)
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/user.png)
-
-![imgage](https://github.com/chiic/book-back/blob/master/overimgs/psd.png)
+<img src="https://github.com/chiic/book-back/blob/master/overimgs/login.png" width="50%" height="50%"/><img src="https://github.com/chiic/book-back/blob/master/overimgs/home.png" width="50%" height="50%"/><img src="https://github.com/chiic/book-back/blob/master/overimgs/upload.png" width="50%" height="50%"/><img src="https://github.com/chiic/book-back/blob/master/overimgs/user.png" width="50%" height="50%"/><img src="https://github.com/chiic/book-back/blob/master/overimgs/psd.png" width="50%" height="50%"/>
