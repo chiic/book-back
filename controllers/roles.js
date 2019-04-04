@@ -3,6 +3,7 @@ var AipFaceClient = require("baidu-aip-sdk").face;
 var nodemailer = require('nodemailer');
 var random = require('string-random');
 var aes = require('../utils/sign_crypto');
+var qs = require('querystring');
 // 利用生成cookie的库来生成密文字符串
 var APP_ID = "15901519";
 var API_KEY = "EnAkLSgGoCOwVhgVwnC3NGqO";
@@ -167,17 +168,11 @@ function sendMail(to, url) {
       pass: 'wnxlmltddlhmcbdb'
     }
   });
-
-  // NB! No need to recreate the transporter object. You can use
-  // the same transporter object for all e-mails
-
-  // setup e-mail data with unicode symbols
   var mailOptions = {
     from: '442747096@qq.com', // 发件地址
     to: to, // 收件列表
     subject: 'register', // 标题
-    //text和html两者只支持一种
-  html: `这是激活链接，${url}<b>Hello world ?</b>请在30分钟内激活` // html 内容
+    html: `这是激活链接，<b>${url}</b>请在30分钟内激活,若邮箱不支持外跳打开，请复制后打开` // html 内容
   };
 
   // send mail with defined transport object
@@ -195,15 +190,34 @@ exports.register = function (req, res, next) {
     }
     models.cacheModel.create(data, function (err, doc) {
       if (!err) {
-        const aesData = aes.aesEncrypt('username=' + req.body.username + 'activeCode=' + randomStr)
-        const url = `http://localhost:3001/role/register?${aesData}`
-        console.log(url)
+        const aesData = aes.aesEncrypt('username=' + req.body.username + '&activeCode=' + randomStr)
+        const url = `http://localhost:3001/role/reg_validate?${aesData}`
         sendMail(req.body.email, url).then(
-          res => console.log(res)
+          info => {
+            res.json({register: 'success'});
+          }
         )
       }
     })
   }
 }
 
-exports.regValidate = function (req, res, next) {}
+exports.regValidate = function (req, res, next) {
+  if (req.query) {
+    const datas = aes.aesDecrypt(Object.keys(req.query)[0])
+    models.cacheModel.findOne(qs.parse(datas), function(err, doc) {
+      if(!err && doc) {
+        const {username, psd} = doc
+        models.rolesModel.create({username, psd, roleName: 'user', faceAuth: false})
+          .then(() => {
+            res.set('Content-Type', 'text/plain;utf-8');
+            res.end('注册成功');
+          })
+      }
+      if(!doc) {
+        res.set('Content-Type', 'text/plain;utf-8');
+        res.end('注册失败，可能是邮箱验证时间太长');
+      }
+    })
+  }
+}

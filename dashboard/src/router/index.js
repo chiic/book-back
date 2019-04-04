@@ -147,6 +147,7 @@ const router = new Router({
 
 let pushFlag = false
 router.beforeEach((to, from, next) => {
+  console.log(typeof to.path)
   if (whiteMenu.indexOf(to.path) !== -1) {
     next()
   } else {

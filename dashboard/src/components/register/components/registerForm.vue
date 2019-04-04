@@ -72,7 +72,12 @@ export default {
         if (valid) {
           const { username, psd, email } = this.ruleForm
           register({username, psd, email}).then(
-            res => console.log(res)
+            res => {
+              if (res.data && res.data.register === 'success') {
+                this.$message('请查收邮箱进行验证')
+                this.resetForm('ruleForm')
+              }
+            }
           )
         } else {
           return false
