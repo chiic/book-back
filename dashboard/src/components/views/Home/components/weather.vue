@@ -23,7 +23,6 @@ export default {
             const weather = new AMap.Weather()
             weather.getForecast(result.city, function (err, data) {
               if (!err) {
-                console.log(data)
                 _this.currentWeather = data.forecasts[0].dayWeather
                 _this.forecasts = data.forecasts
               }

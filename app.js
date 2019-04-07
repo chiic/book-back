@@ -14,8 +14,6 @@ var Api = require('./api/v1/output.js');
 var indexRender = require('./router/indexRender');
 var osRender = require('./router/osRender');
 var roleRender = require('./router/roleRender');
-// 获取Access_token
-require('./getAccessToken');
 // 开启数据库
 require('./models/start_mongo');
 // 常用中间件
