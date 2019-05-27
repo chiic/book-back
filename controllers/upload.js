@@ -1,6 +1,7 @@
 var fs = require('fs');
 var model = require('../models')
 exports.upload = function(req, res, next) {
+    console.log(req.file);
     if(req.file) {
         fs.readFile(req.file.path, 'utf8', function(err, data) {
             if(!err) {
